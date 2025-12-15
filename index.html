@@ -75,20 +75,19 @@
   opacity: 0.55;
   filter: blur(0.2px);
 
-  /* ✅ ADD THIS LINE INSIDE .ambient */
+  transform: translate3d(0,0,0);
   animation: drift 14s ease-in-out infinite;
 }
+
 @keyframes drift {
   0%   { transform: translate3d(0,0,0); }
   50%  { transform: translate3d(14px,-10px,0); }
   100% { transform: translate3d(0,0,0); }
 }
 
-/* Accessibility */
 @media (prefers-reduced-motion: reduce){
   .ambient{ animation: none; }
 }
-
 
     /* ✅ Vignette to center attention (removes “empty sides” feeling) */
     .wrap::after{
