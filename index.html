@@ -8,17 +8,18 @@
   <style>
     :root{
       --bg: #0b1220;
-      --surface: rgba(255,255,255,0.06);
-      --surface2: rgba(255,255,255,0.10);
       --text: rgba(255,255,255,0.92);
       --muted: rgba(255,255,255,0.70);
       --muted2: rgba(255,255,255,0.55);
       --border: rgba(255,255,255,0.12);
       --accent: #6ea8ff;
       --accent2:#7c5cff;
+      --shadow: 0 10px 30px rgba(0,0,0,0.22);
+      --shadowHover: 0 18px 44px rgba(0,0,0,0.35);
     }
 
     * { box-sizing: border-box; }
+
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
@@ -30,10 +31,24 @@
       line-height: 1.6;
     }
 
+    /* Wider container = less empty sides */
     .wrap{
-      max-width: 980px;
-      margin: 42px auto;
-      padding: 0 18px;
+      max-width: 1200px;        /* was ~980 */
+      margin: 32px auto;        /* slightly tighter */
+      padding: 0 24px;
+      position: relative;
+    }
+
+    /* Ambient glow so sides feel intentional, not empty */
+    .ambient{
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(650px 420px at 20% 20%, rgba(124,92,255,0.12), transparent 60%),
+        radial-gradient(650px 420px at 80% 25%, rgba(110,168,255,0.10), transparent 60%);
+      filter: blur(0px);
+      opacity: 0.9;
     }
 
     .topbar{
@@ -41,12 +56,20 @@
       align-items:flex-start;
       justify-content:space-between;
       gap: 16px;
-      margin-bottom: 22px;
+      margin-bottom: 18px;
+    }
+
+    .hero{
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border-radius: 18px;
+      padding: 18px 18px;
+      backdrop-filter: blur(10px);
     }
 
     .brand h1{
       margin:0 0 6px 0;
-      font-size: 2.1rem;
+      font-size: 2.15rem;
       letter-spacing: -0.02em;
     }
 
@@ -93,6 +116,7 @@
       text-decoration:none;
       font-weight: 600;
       transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      will-change: transform;
     }
     .btn:hover{
       transform: translateY(-1px);
@@ -104,18 +128,24 @@
       background: linear-gradient(135deg, rgba(110,168,255,0.25), rgba(124,92,255,0.20));
     }
 
-    .hero{
-      border: 1px solid var(--border);
-      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
-      border-radius: 18px;
-      padding: 18px 18px;
-      backdrop-filter: blur(10px);
+    .accent{
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
+    /* Slightly tighter section headers */
     h2{
-      margin: 28px 0 10px 0;
+      margin: 22px 0 8px 0;   /* was 28/10 */
       font-size: 1.25rem;
       letter-spacing: -0.01em;
+    }
+
+    .section-divider{
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(255,255,255,0.18), transparent);
+      margin: 26px 0;
     }
 
     .grid{
@@ -123,17 +153,35 @@
       grid-template-columns: 1fr;
       gap: 14px;
     }
+
+    /* Make desktop layout feel fuller (70/30-ish) */
     @media (min-width: 860px){
-      .grid{ grid-template-columns: 1fr 1fr; }
+      .grid{ grid-template-columns: 1.35fr 1fr; }
     }
 
     .card{
       border: 1px solid var(--border);
       background: rgba(255,255,255,0.06);
       border-radius: 18px;
-      padding: 18px;
+      padding: 16px 18px;         /* slightly tighter */
       backdrop-filter: blur(10px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.22);
+      box-shadow: var(--shadow);
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+      will-change: transform;
+    }
+
+    /* Hover expand effect */
+    .card:hover{
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: var(--shadowHover);
+      border-color: rgba(110,168,255,0.28);
+      background: rgba(255,255,255,0.075);
+    }
+
+    /* Optional: Respect users who prefer reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .card, .btn { transition: none !important; }
+      .card:hover, .btn:hover { transform: none !important; }
     }
 
     .card h3{
@@ -180,8 +228,11 @@
       color: var(--text);
       text-decoration:none;
       font-weight: 600;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      will-change: transform;
     }
     .link:hover{
+      transform: translateY(-2px);
       background: rgba(255,255,255,0.10);
       border-color: rgba(255,255,255,0.20);
     }
@@ -206,18 +257,12 @@
 
     .mutedlink{ color: var(--muted); text-decoration:none; }
     .mutedlink:hover{ text-decoration:underline; }
-
-    .accent{
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
   </style>
 </head>
 
 <body>
   <div class="wrap">
+    <div class="ambient"></div>
 
     <!-- Header -->
     <div class="topbar hero">
@@ -247,10 +292,10 @@
         My focus is on turning analysis into usable deliverables—reliable evaluation, clear documentation,
         and practical interfaces.
       </p>
-      <p class="hint">
-        Tip: If you're viewing this from LinkedIn, start with the live demo below.
-      </p>
+      <p class="hint">Tip: If you're viewing this from LinkedIn, start with the live demo below.</p>
     </div>
+
+    <div class="section-divider"></div>
 
     <!-- Projects -->
     <h2>Featured projects</h2>
@@ -306,6 +351,8 @@
 
     </div>
 
+    <div class="section-divider"></div>
+
     <!-- Skills -->
     <h2>Skills & Tools</h2>
     <div class="card">
@@ -326,6 +373,8 @@
       </div>
     </div>
 
+    <div class="section-divider"></div>
+
     <!-- Certifications -->
     <h2>Certifications & Badges</h2>
     <div class="card">
@@ -336,6 +385,8 @@
         <a class="link" href="PASTE_CREDLY_BADGE_LINK_HERE" target="_blank" rel="noreferrer">View badge</a>
       </div>
     </div>
+
+    <div class="section-divider"></div>
 
     <!-- Currently working on -->
     <h2>Currently Working On</h2>
@@ -354,17 +405,19 @@
       </p>
     </div>
 
+    <div class="section-divider"></div>
+
     <!-- Resume -->
     <h2>Resume</h2>
     <div class="card">
-      <p style="margin-top:0; color: var(--muted);">
-        Download a copy of my resume.
-      </p>
+      <p style="margin-top:0; color: var(--muted);">Download a copy of my resume.</p>
       <div class="links" style="margin-top:12px;">
         <a class="link" href="assets/Anam_Vakil_Resume.pdf" target="_blank" rel="noreferrer">Download resume (PDF)</a>
       </div>
       <p class="hint">Upload your resume into the <strong>assets</strong> folder using the filename above.</p>
     </div>
+
+    <div class="section-divider"></div>
 
     <!-- Contact -->
     <h2>Contact</h2>
