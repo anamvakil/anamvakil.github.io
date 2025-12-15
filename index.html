@@ -6,20 +6,23 @@
   <title>Anam Vakil | Portfolio</title>
 
   <style>
-:root{
-  --bg: #0e0f12;
-  --text: rgba(255,255,255,0.92);
-  --muted: rgba(255,255,255,0.70);
-  --muted2: rgba(255,255,255,0.55);
-  --border: rgba(255,255,255,0.12);
-  --accent: #fbbf24;   /* amber */
-  --accent2:#f59e0b;  /* deep amber */
-  --shadow: 0 10px 30px rgba(0,0,0,0.28);
-  --shadowHover: 0 18px 44px rgba(0,0,0,0.40);
-}
+    :root{
+      /* Base */
+      --bg: #0b1220;
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.70);
+      --muted2: rgba(255,255,255,0.55);
+      --border: rgba(255,255,255,0.12);
 
+      /* Theme accents (CHANGE THESE TWO to switch theme) */
+      --accent: #fbbf24;   /* amber */
+      --accent2:#f59e0b;   /* deeper amber */
 
-    
+      /* Shadows */
+      --shadow: 0 10px 30px rgba(0,0,0,0.22);
+      --shadowHover: 0 18px 44px rgba(0,0,0,0.35);
+    }
+
     * { box-sizing: border-box; }
 
     body{
@@ -27,29 +30,26 @@
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
       color: var(--text);
       background:
-        radial-gradient(900px 500px at 15% 10%, rgba(124,92,255,0.30), transparent 60%),
-        radial-gradient(900px 500px at 85% 20%, rgba(110,168,255,0.28), transparent 60%),
+        radial-gradient(900px 500px at 15% 10%, color-mix(in srgb, var(--accent2) 30%, transparent), transparent 60%),
+        radial-gradient(900px 500px at 85% 20%, color-mix(in srgb, var(--accent) 28%, transparent), transparent 60%),
         linear-gradient(180deg, #070b14, var(--bg));
       line-height: 1.6;
     }
 
-    /* Wider container = less empty sides */
     .wrap{
-      max-width: 1200px;        /* was ~980 */
-      margin: 32px auto;        /* slightly tighter */
+      max-width: 1200px;
+      margin: 32px auto;
       padding: 0 24px;
       position: relative;
     }
 
-    /* Ambient glow so sides feel intentional, not empty */
     .ambient{
       position: absolute;
       inset: 0;
       pointer-events: none;
       background:
-        radial-gradient(650px 420px at 20% 20%, rgba(124,92,255,0.12), transparent 60%),
-        radial-gradient(650px 420px at 80% 25%, rgba(110,168,255,0.10), transparent 60%);
-      filter: blur(0px);
+        radial-gradient(650px 420px at 20% 20%, color-mix(in srgb, var(--accent2) 14%, transparent), transparent 60%),
+        radial-gradient(650px 420px at 80% 25%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 60%);
       opacity: 0.9;
     }
 
@@ -120,14 +120,20 @@
       transition: transform .15s ease, background .15s ease, border-color .15s ease;
       will-change: transform;
     }
+
     .btn:hover{
       transform: translateY(-1px);
       background: rgba(255,255,255,0.10);
       border-color: rgba(255,255,255,0.20);
     }
+
     .btn.primary{
-      border: 1px solid rgba(110,168,255,0.50);
-      background: linear-gradient(135deg, rgba(110,168,255,0.25), rgba(124,92,255,0.20));
+      border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+      background: linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--accent) 25%, transparent),
+        color-mix(in srgb, var(--accent2) 20%, transparent)
+      );
     }
 
     .accent{
@@ -137,16 +143,20 @@
       color: transparent;
     }
 
-    /* Slightly tighter section headers */
     h2{
-      margin: 22px 0 8px 0;   /* was 28/10 */
+      margin: 22px 0 8px 0;
       font-size: 1.25rem;
       letter-spacing: -0.01em;
     }
 
     .section-divider{
       height: 1px;
-      background: linear-gradient(to right, transparent, rgba(255,255,255,0.18), transparent);
+      background: linear-gradient(
+        to right,
+        transparent,
+        color-mix(in srgb, var(--accent) 22%, rgba(255,255,255,0.18)),
+        transparent
+      );
       margin: 26px 0;
     }
 
@@ -156,7 +166,6 @@
       gap: 14px;
     }
 
-    /* Make desktop layout feel fuller (70/30-ish) */
     @media (min-width: 860px){
       .grid{ grid-template-columns: 1.35fr 1fr; }
     }
@@ -165,22 +174,21 @@
       border: 1px solid var(--border);
       background: rgba(255,255,255,0.06);
       border-radius: 18px;
-      padding: 16px 18px;         /* slightly tighter */
+      padding: 16px 18px;
       backdrop-filter: blur(10px);
       box-shadow: var(--shadow);
       transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
       will-change: transform;
     }
 
-    /* Hover expand effect */
+    /* Hover expand */
     .card:hover{
       transform: translateY(-6px) scale(1.01);
       box-shadow: var(--shadowHover);
-      border-color: rgba(110,168,255,0.28);
+      border-color: color-mix(in srgb, var(--accent) 35%, transparent);
       background: rgba(255,255,255,0.075);
     }
 
-    /* Optional: Respect users who prefer reduced motion */
     @media (prefers-reduced-motion: reduce){
       .card, .btn { transition: none !important; }
       .card:hover, .btn:hover { transform: none !important; }
@@ -191,6 +199,7 @@
       font-size: 1.08rem;
       letter-spacing: -0.01em;
     }
+
     .card p{
       margin: 0 0 10px 0;
       color: var(--muted);
@@ -233,6 +242,7 @@
       transition: transform .15s ease, background .15s ease, border-color .15s ease;
       will-change: transform;
     }
+
     .link:hover{
       transform: translateY(-2px);
       background: rgba(255,255,255,0.10);
@@ -266,12 +276,10 @@
   <div class="wrap">
     <div class="ambient"></div>
 
-    <!-- Header -->
     <div class="topbar hero">
       <div class="brand">
         <h1><span class="accent">Anam Vakil</span></h1>
         <p class="subtitle">Business Intelligence • Data Analytics • ML • Cloud</p>
-
         <div class="pillrow">
           <span class="pill">Ottawa, Canada</span>
           <span class="pill">BISI @ Algonquin College</span>
@@ -286,7 +294,6 @@
       </div>
     </div>
 
-    <!-- About -->
     <h2>About</h2>
     <div class="card">
       <p style="margin-top:0;">
@@ -299,11 +306,8 @@
 
     <div class="section-divider"></div>
 
-    <!-- Projects -->
     <h2>Featured projects</h2>
     <div class="grid">
-
-      <!-- Project 1 -->
       <div class="card">
         <h3>Customer Churn Prediction (BI + ML + UI)</h3>
         <p>
@@ -328,7 +332,6 @@
         <p class="hint">Includes probability-based risk bands (low/medium/high) and a user-friendly UI.</p>
       </div>
 
-      <!-- Project 2 -->
       <div class="card">
         <h3>Data Engineering & Integration (SQL Server)</h3>
         <p>
@@ -350,12 +353,10 @@
 
         <p class="hint">If you don’t have a link yet, you can leave it for now and add later.</p>
       </div>
-
     </div>
 
     <div class="section-divider"></div>
 
-    <!-- Skills -->
     <h2>Skills & Tools</h2>
     <div class="card">
       <p class="hint" style="margin-top:0;">A focused snapshot of the tools and areas I work with.</p>
@@ -377,7 +378,6 @@
 
     <div class="section-divider"></div>
 
-    <!-- Certifications -->
     <h2>Certifications & Badges</h2>
     <div class="card">
       <p style="margin-top:0; color: var(--muted);">
@@ -390,7 +390,6 @@
 
     <div class="section-divider"></div>
 
-    <!-- Currently working on -->
     <h2>Currently Working On</h2>
     <div class="card">
       <p style="margin-top:0; color: var(--muted);">
@@ -409,7 +408,6 @@
 
     <div class="section-divider"></div>
 
-    <!-- Resume -->
     <h2>Resume</h2>
     <div class="card">
       <p style="margin-top:0; color: var(--muted);">Download a copy of my resume.</p>
@@ -421,12 +419,9 @@
 
     <div class="section-divider"></div>
 
-    <!-- Contact -->
     <h2>Contact</h2>
     <div class="card">
-      <p style="margin-top:0; color: var(--muted);">
-        Best way to reach me is LinkedIn or email.
-      </p>
+      <p style="margin-top:0; color: var(--muted);">Best way to reach me is LinkedIn or email.</p>
       <p class="hint">
         <a class="mutedlink" href="PASTE_LINKEDIN_URL" target="_blank" rel="noreferrer">LinkedIn</a>
         •
@@ -434,7 +429,6 @@
       </p>
     </div>
 
-    <!-- Footer -->
     <div class="footer">
       <div>© 2025 Anam Vakil</div>
       <div>
