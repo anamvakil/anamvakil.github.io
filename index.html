@@ -75,11 +75,12 @@
 
     .topbar{
       display:flex;
-      align-items:flex-start;
+      align-items:center;          /* ✅ was flex-start */
       justify-content:space-between;
       gap: 16px;
       margin-bottom: 18px;
     }
+
 
     .hero{
       border: 1px solid var(--border);
@@ -212,6 +213,15 @@
       .card:hover, .btn:hover { transform: none !important; }
     }
 
+    @media (max-width: 860px){
+      .topbar{
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .cta{
+        justify-content: flex-start;
+      }
+    }
     .card h3{
       margin: 0 0 8px 0;
       font-size: 1.08rem;
