@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Anam Vakil | Portfolio</title>
+  <meta name="description" content="Anam Vakil — Data, BI & Cloud portfolio. Projects, skills, and contact." />
 
   <style>
     :root{
@@ -13,21 +14,17 @@
       --muted2: rgba(255,255,255,0.55);
       --border: rgba(255,255,255,0.12);
 
-      /* Accent colors */
+      /* Theme accents */
       --accent: #fbbf24;
       --accent2:#f59e0b;
 
       --shadow: 0 10px 30px rgba(0,0,0,0.22);
       --shadowHover: 0 18px 44px rgba(0,0,0,0.35);
+      --radius: 18px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html, body {
-      height: 100%;
-    }
+    *{ box-sizing: border-box; }
+    html, body { height: 100%; }
 
     body{
       margin: 0;
@@ -37,7 +34,7 @@
       overflow-x: hidden;
     }
 
-    /* ✅ ACTUAL BACKGROUND */
+    /* ✅ Visible background */
     body::before{
       content:"";
       position: fixed;
@@ -49,8 +46,6 @@
         radial-gradient(900px 700px at 45% 90%, rgba(255,255,255,0.08), transparent 60%),
         linear-gradient(180deg, rgba(255,255,255,0.02), transparent 40%, rgba(0,0,0,0.25));
     }
-
-    /* Subtle texture */
     body::after{
       content:"";
       position: fixed;
@@ -62,175 +57,586 @@
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
     }
 
-    /* Layout */
-    main{
-      max-width: 1100px;
+    a{ color: inherit; }
+    .wrap{
+      max-width: 1120px;
       margin: 0 auto;
-      padding: 64px 20px 96px;
+      padding: 24px 20px 88px;
       background: transparent;
     }
 
-    header{
-      margin-bottom: 64px;
+    /* Nav */
+    .nav{
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      margin: 14px 0 18px;
     }
-
-    h1{
-      font-size: clamp(2.2rem, 4vw, 3.2rem);
-      margin: 0 0 12px;
+    .navInner{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(10, 15, 28, 0.55);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      font-weight: 700;
       letter-spacing: -0.02em;
     }
-
-    h1 span{
-      color: var(--accent);
+    .dot{
+      width: 12px; height: 12px;
+      border-radius: 99px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 18px rgba(251,191,36,0.35);
     }
-
-    p.lead{
-      font-size: 1.1rem;
+    .links{
+      display:flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .links a{
+      text-decoration: none;
       color: var(--muted);
-      max-width: 720px;
-      line-height: 1.6;
+      font-size: 0.95rem;
+      padding: 8px 10px;
+      border-radius: 999px;
+      transition: background .2s ease, color .2s ease;
+    }
+    .links a:hover{
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
     }
 
-    section{
-      margin-top: 64px;
-    }
-
-    section h2{
-      font-size: 1.6rem;
-      margin-bottom: 20px;
-      letter-spacing: -0.01em;
-    }
-
-    /* Cards */
-    .grid{
+    /* Hero */
+    .hero{
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 22px;
+      align-items: stretch;
+      margin-top: 18px;
+    }
+    @media (max-width: 900px){
+      .hero{ grid-template-columns: 1fr; }
     }
 
     .card{
-      background: rgba(255,255,255,0.04);
       border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 22px;
+      background: rgba(255,255,255,0.04);
+      border-radius: var(--radius);
       box-shadow: var(--shadow);
       backdrop-filter: blur(12px);
-      transition: transform .25s ease, box-shadow .25s ease;
     }
 
-    .card:hover{
-      transform: translateY(-6px);
-      box-shadow: var(--shadowHover);
+    .heroMain{
+      padding: 28px;
+    }
+    h1{
+      margin: 0 0 10px;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+    }
+    .accent{ color: var(--accent); }
+    .sub{
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.55;
+      max-width: 60ch;
+    }
+    .ctaRow{
+      display:flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      text-decoration:none;
+      border-radius: 999px;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.20);
+      font-weight: 600;
+    }
+    .btn:hover{ transform: translateY(-2px); }
+    .btn.primary{
+      border: 1px solid rgba(251,191,36,0.35);
+      background: linear-gradient(135deg, rgba(251,191,36,0.20), rgba(245,158,11,0.10));
+    }
+    .meta{
+      margin-top: 18px;
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      color: var(--muted2);
+      font-size: 0.92rem;
+    }
+    .pill{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      padding: 8px 10px;
+      border-radius: 999px;
     }
 
-    .card h3{
-      margin: 0 0 8px;
-      font-size: 1.1rem;
+    .heroSide{
+      padding: 18px;
+      display:flex;
+      flex-direction: column;
+      gap: 12px;
     }
-
-    .card p{
+    .mini{
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+    }
+    .mini h3{
+      margin: 0 0 6px;
+      font-size: 1rem;
+      letter-spacing: -0.01em;
+    }
+    .mini p{
       margin: 0;
       color: var(--muted2);
-      line-height: 1.5;
+      line-height: 1.45;
       font-size: 0.95rem;
     }
 
+    /* Sections */
+    section{
+      margin-top: 54px;
+    }
+    .sectionTitle{
+      display:flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    h2{
+      margin: 0;
+      font-size: 1.55rem;
+      letter-spacing: -0.02em;
+    }
+    .hint{
+      color: var(--muted2);
+      font-size: 0.95rem;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+    }
+    .col6{ grid-column: span 6; }
+    .col4{ grid-column: span 4; }
+    .col8{ grid-column: span 8; }
+    .col12{ grid-column: span 12; }
+
+    @media (max-width: 900px){
+      .col6, .col4, .col8{ grid-column: span 12; }
+    }
+
+    .block{
+      padding: 20px;
+    }
+    .block h3{
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+    }
+    .block p, .block li{
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0;
+      font-size: 0.98rem;
+    }
+    .block ul{
+      margin: 10px 0 0;
+      padding-left: 18px;
+    }
+    .tags{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .tag{
+      font-size: 0.9rem;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      padding: 8px 10px;
+      border-radius: 999px;
+    }
+
+    /* Project cards */
+    .proj{
+      padding: 20px;
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .proj:hover{
+      transform: translateY(-6px);
+      box-shadow: var(--shadowHover);
+    }
+    .proj .top{
+      display:flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .proj h3{ margin: 0; }
+    .proj .badge{
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.85);
+      border: 1px solid rgba(251,191,36,0.25);
+      background: rgba(251,191,36,0.10);
+      padding: 6px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .proj .linksRow{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+    .proj .linksRow a{
+      text-decoration:none;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .proj .linksRow a:hover{ text-decoration: underline; }
+
     /* Footer */
     footer{
-      margin-top: 96px;
-      padding-top: 24px;
+      margin-top: 80px;
+      padding-top: 22px;
       border-top: 1px solid var(--border);
       color: var(--muted2);
-      font-size: 0.9rem;
-      display: flex;
+      display:flex;
       justify-content: space-between;
-      flex-wrap: wrap;
       gap: 12px;
+      flex-wrap: wrap;
     }
-
-    footer a{
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    footer a:hover{
-      text-decoration: underline;
-    }
+    .small{ font-size: 0.92rem; color: var(--muted2); }
+    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
   </style>
 </head>
 
 <body>
+  <div class="wrap">
 
-<main>
+    <!-- NAV -->
+    <div class="nav">
+      <div class="navInner">
+        <a class="brand" href="#top">
+          <span class="dot" aria-hidden="true"></span>
+          <span>Anam Vakil</span>
+        </a>
 
-  <header>
-    <h1>Anam <span>Vakil</span></h1>
-    <p class="lead">
-      Data & Business Intelligence professional focused on analytics, cloud,
-      and building systems that turn raw data into meaningful insight.
-      Currently pursuing Business Intelligence System Infrastructure (BISI).
-    </p>
-  </header>
-
-  <section>
-    <h2>Projects</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Telco Customer Churn</h3>
-        <p>
-          End-to-end ML pipeline with Logistic Regression & Random Forest,
-          cross-validation, and Streamlit deployment.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>National Address Register (GA5)</h3>
-        <p>
-          Large-scale SQL Server data engineering project with staging,
-          3NF normalization, ERD, and optimized joins.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>Salesforce Admin Labs</h3>
-        <p>
-          Hands-on configuration, automation, security, and reporting using
-          Salesforce Trailhead.
-        </p>
+        <div class="links">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#experience">Experience</a>
+          <a href="#education">Education</a>
+          <a href="#certs">Certifications</a>
+          <a href="#contact">Contact</a>
+        </div>
       </div>
     </div>
-  </section>
 
-  <section>
-    <h2>Skills</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Data & Analytics</h3>
-        <p>SQL Server, Power BI, Python, Pandas, NumPy, EDA</p>
+    <!-- HERO -->
+    <div id="top" class="hero">
+      <div class="card heroMain">
+        <h1>Hi, I’m <span class="accent">Anam</span> — I build data systems & dashboards that drive decisions.</h1>
+        <p class="sub">
+          Business Intelligence + Data Engineering focused. I enjoy turning messy data into clean models,
+          reliable pipelines, and clear insights for stakeholders.
+        </p>
+
+        <div class="ctaRow">
+          <a class="btn primary" href="#projects">View Projects</a>
+          <a class="btn" href="#contact">Contact Me</a>
+          <!-- Replace # with your real resume link -->
+          <a class="btn" href="#" download>Download Resume</a>
+        </div>
+
+        <div class="meta">
+          <span class="pill">📍 Ottawa, Canada</span>
+          <span class="pill">🎓 BISI @ Algonquin College</span>
+          <span class="pill">☁️ Cloud + BI + SQL</span>
+        </div>
       </div>
 
-      <div class="card">
-        <h3>Cloud & Platforms</h3>
-        <p>AWS, Salesforce, Snowflake (foundations)</p>
-      </div>
-
-      <div class="card">
-        <h3>Concepts</h3>
-        <p>Data Modeling, 3NF, ML Fundamentals, BI Architecture</p>
+      <div class="card heroSide">
+        <div class="mini">
+          <h3>Current Focus</h3>
+          <p>SQL Server • Power BI • Python • AWS foundations</p>
+        </div>
+        <div class="mini">
+          <h3>Open To</h3>
+          <p>Co-op / Internship • Data Analyst • BI / Data Engineering roles</p>
+        </div>
+        <div class="mini">
+          <h3>Quick Links</h3>
+          <p>
+            <span class="mono">LinkedIn:</span> <a href="#" style="color:var(--accent)">add link</a><br/>
+            <span class="mono">GitHub:</span> <a href="#" style="color:var(--accent)">add link</a>
+          </p>
+        </div>
       </div>
     </div>
-  </section>
 
-  <footer>
-    <div>© 2025 Anam Vakil</div>
-    <div>
-      <a href="#">LinkedIn</a> ·
-      <a href="#">GitHub</a> ·
-      <a href="#">Email</a>
-    </div>
-  </footer>
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="sectionTitle">
+        <h2>About</h2>
+        <div class="hint">A quick story + what I’m building</div>
+      </div>
 
-</main>
+      <div class="grid">
+        <div class="card block col8">
+          <h3>Who I am</h3>
+          <p>
+            <!-- Replace with the exact about text we had earlier -->
+            I’m a BI / Data-focused student and builder who loves structured problem solving —
+            from data modeling and normalization to dashboards and machine learning.
+          </p>
+          <p style="margin-top:10px;">
+            I enjoy working on projects that have real-world impact: clean data, strong schema design,
+            and insights that business users can actually use.
+          </p>
+        </div>
 
+        <div class="card block col4">
+          <h3>Highlights</h3>
+          <ul>
+            <li>Strong with SQL, modeling (3NF), and BI concepts</li>
+            <li>Hands-on projects: Churn ML + National Address Register</li>
+            <li>Building a portfolio + professional brand</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="sectionTitle">
+        <h2>Skills</h2>
+        <div class="hint">Tools + what I can do with them</div>
+      </div>
+
+      <div class="grid">
+        <div class="card block col4">
+          <h3>Data</h3>
+          <div class="tags">
+            <span class="tag">SQL Server</span>
+            <span class="tag">Data Modeling</span>
+            <span class="tag">Normalization (3NF)</span>
+            <span class="tag">ETL / Staging</span>
+          </div>
+        </div>
+
+        <div class="card block col4">
+          <h3>Analytics</h3>
+          <div class="tags">
+            <span class="tag">Power BI</span>
+            <span class="tag">DAX (basic)</span>
+            <span class="tag">KPIs & Reporting</span>
+            <span class="tag">EDA</span>
+          </div>
+        </div>
+
+        <div class="card block col4">
+          <h3>Programming & Cloud</h3>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">Pandas</span>
+            <span class="tag">Streamlit</span>
+            <span class="tag">AWS (foundations)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="sectionTitle">
+        <h2>Projects</h2>
+        <div class="hint">A few things I’m proud of</div>
+      </div>
+
+      <div class="grid">
+        <div class="card proj col6">
+          <div class="top">
+            <h3>Telco Customer Churn Prediction</h3>
+            <span class="badge">ML • Streamlit</span>
+          </div>
+          <p>
+            Built a churn prediction pipeline, tested models using cross-validation, and selected a reliable final model.
+          </p>
+          <div class="tags">
+            <span class="tag">Logistic Regression</span>
+            <span class="tag">Cross-validation</span>
+            <span class="tag">Feature Engineering</span>
+            <span class="tag">Deployment</span>
+          </div>
+          <div class="linksRow">
+            <a href="#">GitHub</a>
+            <a href="#">Live Demo</a>
+            <a href="#">Case Study</a>
+          </div>
+        </div>
+
+        <div class="card proj col6">
+          <div class="top">
+            <h3>National Address Register (GA5)</h3>
+            <span class="badge">SQL Server • DE</span>
+          </div>
+          <p>
+            Designed staging + normalized schema, built scripts for loading and transforming large datasets while preserving integrity.
+          </p>
+          <div class="tags">
+            <span class="tag">Staging Table</span>
+            <span class="tag">3NF Design</span>
+            <span class="tag">T-SQL</span>
+            <span class="tag">ERD</span>
+          </div>
+          <div class="linksRow">
+            <a href="#">SQL Scripts</a>
+            <a href="#">ERD</a>
+            <a href="#">Report</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="sectionTitle">
+        <h2>Experience</h2>
+        <div class="hint">Work, internships, volunteering</div>
+      </div>
+
+      <div class="grid">
+        <div class="card block col12">
+          <h3>Put your role here (Volunteer / Work / Club)</h3>
+          <p class="small">Company/Org • City • Dates</p>
+          <ul>
+            <li>Impact-driven bullet (what you did + outcome)</li>
+            <li>Tools used (SQL / Power BI / Python / etc.)</li>
+            <li>Any measurable result (speed, quality, savings)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <div class="sectionTitle">
+        <h2>Education</h2>
+        <div class="hint">What I’m studying</div>
+      </div>
+
+      <div class="grid">
+        <div class="card block col6">
+          <h3>Algonquin College — BISI (Co-op)</h3>
+          <p class="small">Business Intelligence System Infrastructure • Ottawa • 2025–2026</p>
+          <ul>
+            <li>Data Engineering, BI, Cloud foundations</li>
+            <li>SQL Server, Power BI, Python projects</li>
+          </ul>
+        </div>
+
+        <div class="card block col6">
+          <h3>Additional Learning</h3>
+          <ul>
+            <li>Salesforce Trailhead (Admin learning)</li>
+            <li>AWS foundations / cloud learning</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section id="certs">
+      <div class="sectionTitle">
+        <h2>Certifications</h2>
+        <div class="hint">In progress counts too</div>
+      </div>
+
+      <div class="grid">
+        <div class="card block col4">
+          <h3>AWS (In Progress)</h3>
+          <p>Cloud Practitioner / ML foundations</p>
+        </div>
+        <div class="card block col4">
+          <h3>Salesforce (In Progress)</h3>
+          <p>Salesforce Administrator prep</p>
+        </div>
+        <div class="card block col4">
+          <h3>Power BI</h3>
+          <p>Dashboards, data modeling, visuals</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="sectionTitle">
+        <h2>Contact</h2>
+        <div class="hint">Let’s connect</div>
+      </div>
+
+      <div class="grid">
+        <div class="card block col6">
+          <h3>Email</h3>
+          <p>Replace with your email: <span class="mono">anam@email.com</span></p>
+          <div class="ctaRow" style="margin-top:12px;">
+            <a class="btn primary" href="mailto:anam@email.com">Email Me</a>
+          </div>
+        </div>
+
+        <div class="card block col6">
+          <h3>Social</h3>
+          <ul>
+            <li><a href="#" style="color:var(--accent); text-decoration:none;">LinkedIn</a></li>
+            <li><a href="#" style="color:var(--accent); text-decoration:none;">GitHub</a></li>
+            <li><a href="#" style="color:var(--accent); text-decoration:none;">Portfolio Repo</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span class="mono">2025</span> Anam Vakil</div>
+      <div class="small">
+        Built with HTML/CSS • <span class="mono">Background fixed ✅</span>
+      </div>
+    </footer>
+
+  </div>
 </body>
 </html>
