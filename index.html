@@ -3,132 +3,287 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Anam Vakil | Data & Business Intelligence Portfolio</title>
+  <title>Anam Vakil | Portfolio</title>
 
   <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      max-width: 960px;
-      margin: 40px auto;
-      padding: 0 18px;
+    :root{
+      --bg: #0b1220;
+      --surface: rgba(255,255,255,0.06);
+      --surface2: rgba(255,255,255,0.10);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.70);
+      --muted2: rgba(255,255,255,0.55);
+      --border: rgba(255,255,255,0.12);
+      --accent: #6ea8ff;
+      --accent2:#7c5cff;
+      --good:#39d98a;
+      --warn:#ffb020;
+    }
+
+    * { box-sizing: border-box; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--text);
+      background:
+        radial-gradient(900px 500px at 15% 10%, rgba(124,92,255,0.30), transparent 60%),
+        radial-gradient(900px 500px at 85% 20%, rgba(110,168,255,0.28), transparent 60%),
+        linear-gradient(180deg, #070b14, var(--bg));
       line-height: 1.6;
-      color: #222;
     }
-    h1 {
-      margin-bottom: 4px;
+
+    .wrap{
+      max-width: 980px;
+      margin: 42px auto;
+      padding: 0 18px;
     }
-    .subtitle {
-      color: #555;
-      margin-top: 0;
+
+    .topbar{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 16px;
+      margin-bottom: 22px;
     }
-    .section {
-      margin-top: 42px;
+
+    .brand h1{
+      margin:0 0 6px 0;
+      font-size: 2.1rem;
+      letter-spacing: -0.02em;
     }
-    .card {
-      border: 1px solid #ddd;
-      border-radius: 10px;
+
+    .brand .subtitle{
+      margin:0;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .pillrow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top: 14px;
+    }
+
+    .pill{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.05);
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .cta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      margin-top: 6px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      text-decoration:none;
+      font-weight: 600;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(255,255,255,0.20);
+    }
+    .btn.primary{
+      border: 1px solid rgba(110,168,255,0.50);
+      background: linear-gradient(135deg, rgba(110,168,255,0.25), rgba(124,92,255,0.20));
+    }
+
+    .hero{
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border-radius: 18px;
+      padding: 18px 18px;
+      backdrop-filter: blur(10px);
+    }
+
+    h2{
+      margin: 28px 0 10px 0;
+      font-size: 1.25rem;
+      letter-spacing: -0.01em;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    @media (min-width: 860px){
+      .grid{ grid-template-columns: 1fr 1fr; }
+    }
+
+    .card{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      border-radius: 18px;
       padding: 18px;
-      margin-top: 18px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.22);
     }
-    .tags {
-      color: #555;
+
+    .card h3{
+      margin: 0 0 8px 0;
+      font-size: 1.08rem;
+      letter-spacing: -0.01em;
+    }
+    .card p{
+      margin: 0 0 10px 0;
+      color: var(--muted);
+    }
+
+    .badges{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top: 10px;
+    }
+
+    .badge{
+      font-size: 0.88rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.05);
+      color: var(--muted);
+    }
+
+    .links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top: 14px;
+    }
+
+    .link{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 9px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      text-decoration:none;
+      font-weight: 600;
+    }
+    .link:hover{
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(255,255,255,0.20);
+    }
+
+    .hint{
+      color: var(--muted2);
       font-size: 0.95rem;
+      margin-top: 8px;
     }
-    a {
-      text-decoration: none;
-      color: #0b63ce;
+
+    .footer{
+      margin-top: 38px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+      color: var(--muted2);
+      font-size: 0.92rem;
+      display:flex;
+      justify-content:space-between;
+      gap: 12px;
+      flex-wrap:wrap;
     }
-    a:hover {
-      text-decoration: underline;
-    }
-    .links a {
-      margin-right: 14px;
-      font-weight: 500;
-    }
-    footer {
-      margin-top: 60px;
-      font-size: 0.9rem;
-      color: #666;
-      border-top: 1px solid #eee;
-      padding-top: 20px;
+
+    .mutedlink{ color: var(--muted); text-decoration:none; }
+    .mutedlink:hover{ text-decoration:underline; }
+
+    .accent{
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
   </style>
 </head>
 
 <body>
+  <div class="wrap">
 
-  <h1>Anam Vakil</h1>
-  <p class="subtitle">
-    Business Intelligence • Data Analytics • Machine Learning • Cloud
-  </p>
+    <div class="topbar hero">
+      <div class="brand">
+        <h1><span class="accent">Anam Vakil</span></h1>
+        <p class="subtitle">Business Intelligence • Data Analytics • ML • Cloud</p>
 
-  <div class="section">
+        <div class="pillrow">
+          <span class="pill">Ottawa, Canada</span>
+          <span class="pill">BISI @ Algonquin College</span>
+          <span class="pill">Open to co-op & projects</span>
+        </div>
+      </div>
+
+      <div class="cta">
+        <a class="btn primary" href="PASTE_LINKEDIN_URL" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a class="btn" href="https://github.com/anamvakil" target="_blank" rel="noreferrer">GitHub</a>
+        <a class="btn" href="mailto:PASTE_EMAIL">Email</a>
+      </div>
+    </div>
+
     <h2>About</h2>
-    <p>
-      I am a Business Intelligence student at Algonquin College with experience
-      building end-to-end data solutions that connect analytics, engineering,
-      and business decision-making. My work focuses on turning analytical models
-      into usable systems through thoughtful evaluation, clear documentation,
-      and practical interfaces.
-    </p>
-  </div>
-
-  <div class="section">
-    <h2>Projects</h2>
-
     <div class="card">
-      <h3>Customer Churn Prediction (BI + ML + UI)</h3>
       <p>
-        End-to-end machine learning project using the Telco Customer Churn dataset.
-        The work includes data preparation, feature handling, model training,
-        evaluation across multiple data splits, and deployment through an
-        interactive Streamlit UI.
+        I build end-to-end data solutions that connect analytics, engineering, and business decision-making.
+        My focus is on turning analysis into usable deliverables—reliable evaluation, clear documentation,
+        and practical interfaces.
       </p>
-      <p>
-        The project emphasizes reliability, interpretability, and usability
-        rather than isolated model performance.
-      </p>
-      <p class="tags">
-        Python • Pandas • scikit-learn • Machine Learning Pipelines • Streamlit
-      </p>
-      <p class="links">
-        <a href="PASTE_STREAMLIT_LINK_HERE" target="_blank">Live Demo</a>
-        <a href="PASTE_GITHUB_REPO_LINK_HERE" target="_blank">Source Code</a>
-        <a href="assets/churn-report.pdf" target="_blank">IEEE-style Report</a>
+      <p class="hint">
+        Tip: If you're viewing this from LinkedIn, start with the live demo below.
       </p>
     </div>
 
-    <div class="card">
-      <h3>Data Engineering & Integration</h3>
-      <p>
-        Data engineering project focused on staging, normalization to 3NF,
-        relational modeling, and data transformation using SQL Server.
-        The solution includes structured ETL scripts, ERD design, and
-        performance-aware data loading.
-      </p>
-      <p class="tags">
-        SQL Server • T-SQL • Data Modeling • ETL • Normalization
-      </p>
-    </div>
+    <h2>Featured projects</h2>
+    <div class="grid">
 
-  </div>
+      <div class="card">
+        <h3>Customer Churn Prediction (BI + ML + UI)</h3>
+        <p>
+          Implemented an end-to-end ML pipeline on the Telco Customer Churn dataset and delivered it through
+          an interactive Streamlit UI so predictions can be used beyond a notebook.
+        </p>
 
-  <div class="section">
-    <h2>Contact</h2>
-    <p>
-      LinkedIn:
-      <a href="PASTE_LINKEDIN_URL" target="_blank">linkedin.com/in/...</a><br/>
-      GitHub:
-      <a href="https://github.com/anamvakil" target="_blank">github.com/anamvakil</a><br/>
-      Email:
-      <a href="mailto:PASTE_EMAIL">PASTE_EMAIL</a>
-    </p>
-  </div>
+        <div class="badges">
+          <span class="badge">Python</span>
+          <span class="badge">Pandas</span>
+          <span class="badge">scikit-learn</span>
+          <span class="badge">Streamlit</span>
+          <span class="badge">Model evaluation</span>
+        </div>
 
-  <footer>
-    © 2025 Anam Vakil
-  </footer>
+        <div class="links">
+          <a class="link" href="PASTE_STREAMLIT_LINK_HERE" target="_blank" rel="noreferrer">Live demo</a>
+          <a class="link" href="PASTE_GITHUB_REPO_LINK_HERE" target="_blank" rel="noreferrer">Source code</a>
+          <a class="link" href="assets/churn-report.pdf" target="_blank" rel="noreferrer">IEEE report</a>
+        </div>
 
-</body>
-</html>
+        <p class="hint">Includes probability-based risk bands (low/medium/high) and a user-friendly UI.</p>
+      </div>
 
+      <div class="card">
+        <h3>Data Engineering & Integration (SQL Server)</h3>
+        <p>
+          Designed a normalized relational model (3NF), built staging-to-target transformations, and
+          documented the solution with ERD and scripts focused on data quality and performance.
+        </p>
+
+        <div class="badge
