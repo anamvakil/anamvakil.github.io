@@ -16,8 +16,6 @@
       --border: rgba(255,255,255,0.12);
       --accent: #6ea8ff;
       --accent2:#7c5cff;
-      --good:#39d98a;
-      --warn:#ffb020;
     }
 
     * { box-sizing: border-box; }
@@ -221,6 +219,7 @@
 <body>
   <div class="wrap">
 
+    <!-- Header -->
     <div class="topbar hero">
       <div class="brand">
         <h1><span class="accent">Anam Vakil</span></h1>
@@ -235,14 +234,15 @@
 
       <div class="cta">
         <a class="btn primary" href="PASTE_LINKEDIN_URL" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a class="btn" href="https://github.com/anamvakil" target="_blank" rel="noreferrer">GitHub</a>
+        <a class="btn" href="PASTE_GITHUB_PROFILE_URL" target="_blank" rel="noreferrer">GitHub</a>
         <a class="btn" href="mailto:PASTE_EMAIL">Email</a>
       </div>
     </div>
 
+    <!-- About -->
     <h2>About</h2>
     <div class="card">
-      <p>
+      <p style="margin-top:0;">
         I build end-to-end data solutions that connect analytics, engineering, and business decision-making.
         My focus is on turning analysis into usable deliverables—reliable evaluation, clear documentation,
         and practical interfaces.
@@ -252,9 +252,11 @@
       </p>
     </div>
 
+    <!-- Projects -->
     <h2>Featured projects</h2>
     <div class="grid">
 
+      <!-- Project 1 -->
       <div class="card">
         <h3>Customer Churn Prediction (BI + ML + UI)</h3>
         <p>
@@ -272,18 +274,19 @@
 
         <div class="links">
           <a class="link" href="PASTE_STREAMLIT_LINK_HERE" target="_blank" rel="noreferrer">Live demo</a>
-          <a class="link" href="PASTE_GITHUB_REPO_LINK_HERE" target="_blank" rel="noreferrer">Source code</a>
+          <a class="link" href="PASTE_CHURN_REPO_LINK_HERE" target="_blank" rel="noreferrer">Source code</a>
           <a class="link" href="assets/churn-report.pdf" target="_blank" rel="noreferrer">IEEE report</a>
         </div>
 
         <p class="hint">Includes probability-based risk bands (low/medium/high) and a user-friendly UI.</p>
       </div>
 
+      <!-- Project 2 -->
       <div class="card">
         <h3>Data Engineering & Integration (SQL Server)</h3>
         <p>
-          Designed a normalized relational model (3NF), built staging-to-target transformations, and
-          documented the solution with ERD and scripts focused on data quality and performance.
+          Designed a normalized relational model (3NF), built staging-to-target transformations, and documented the
+          solution with ERD and scripts focused on data quality and performance.
         </p>
 
         <div class="badges">
@@ -298,73 +301,75 @@
           <a class="link" href="PASTE_DE_PROJECT_LINK_HERE" target="_blank" rel="noreferrer">Project details</a>
         </div>
 
-        <p class="hint">If you don’t have a link yet, leave it blank for now and add later.</p>
+        <p class="hint">If you don’t have a link yet, you can leave it for now and add later.</p>
       </div>
 
     </div>
+
+    <!-- Skills -->
     <h2>Skills & Tools</h2>
-<div class="card">
-  <p class="hint" style="margin-top:0;">A focused snapshot of the tools and areas I work with.</p>
+    <div class="card">
+      <p class="hint" style="margin-top:0;">A focused snapshot of the tools and areas I work with.</p>
+      <div class="badges" style="margin-top:12px;">
+        <span class="badge">Python</span>
+        <span class="badge">Pandas</span>
+        <span class="badge">NumPy</span>
+        <span class="badge">scikit-learn</span>
+        <span class="badge">SQL Server</span>
+        <span class="badge">T-SQL</span>
+        <span class="badge">Data Modeling (3NF)</span>
+        <span class="badge">ETL / Data Integration</span>
+        <span class="badge">Streamlit</span>
+        <span class="badge">Data Visualization</span>
+        <span class="badge">AWS Fundamentals</span>
+        <span class="badge">GitHub</span>
+      </div>
+    </div>
 
-  <div class="badges" style="margin-top:12px;">
-    <span class="badge">Python</span>
-    <span class="badge">Pandas</span>
-    <span class="badge">NumPy</span>
-    <span class="badge">scikit-learn</span>
-    <span class="badge">SQL Server</span>
-    <span class="badge">T-SQL</span>
-    <span class="badge">Data Modeling (3NF)</span>
-    <span class="badge">ETL / Data Integration</span>
-    <span class="badge">Streamlit</span>
-    <span class="badge">Data Visualization</span>
-    <span class="badge">AWS Fundamentals</span>
-    <span class="badge">GitHub</span>
-  </div>
-</div>
+    <!-- Certifications -->
+    <h2>Certifications & Badges</h2>
+    <div class="card">
+      <p style="margin-top:0; color: var(--muted);">
+        AWS Cloud Foundations (AWS Skill Builder) — Verified via Credly
+      </p>
+      <div class="links" style="margin-top:12px;">
+        <a class="link" href="PASTE_CREDLY_BADGE_LINK_HERE" target="_blank" rel="noreferrer">View badge</a>
+      </div>
+    </div>
 
-<h2>Certifications & Badges</h2>
-<div class="card">
-  <p style="margin-top:0; color: var(--muted);">
-    AWS Cloud Foundations (AWS Skill Builder) — Verified via Credly
-  </p>
-  <div class="links" style="margin-top:12px;">
-    <a class="link" href="PASTE_CREDLY_BADGE_LINK_HERE" target="_blank" rel="noreferrer">View badge</a>
-  </div>
-  <p class="hint">More credentials will be added here as I complete them.</p>
-</div>
+    <!-- Currently working on -->
+    <h2>Currently Working On</h2>
+    <div class="card">
+      <p style="margin-top:0; color: var(--muted);">
+        Building additional BI dashboards and data engineering projects, and continuing AWS cloud learning.
+      </p>
+      <div class="badges" style="margin-top:12px;">
+        <span class="badge">Portfolio projects</span>
+        <span class="badge">BI storytelling</span>
+        <span class="badge">Data engineering practice</span>
+        <span class="badge">AWS learning</span>
+      </div>
+      <p class="hint" style="margin-top:12px;">
+        I’m open to collaboration opportunities where data, engineering, and business come together to create practical impact.
+      </p>
+    </div>
 
-<h2>Currently Working On</h2>
-<div class="card">
-  <p style="margin-top:0; color: var(--muted);">
-    I’m actively building on my BI + data engineering foundation through coursework and hands-on projects.
-  </p>
+    <!-- Resume -->
+    <h2>Resume</h2>
+    <div class="card">
+      <p style="margin-top:0; color: var(--muted);">
+        Download a copy of my resume.
+      </p>
+      <div class="links" style="margin-top:12px;">
+        <a class="link" href="assets/Anam_Vakil_Resume.pdf" target="_blank" rel="noreferrer">Download resume (PDF)</a>
+      </div>
+      <p class="hint">Upload your resume into the <strong>assets</strong> folder using the filename above.</p>
+    </div>
 
-  <div class="badges" style="margin-top:12px;">
-    <span class="badge">Expanding portfolio projects</span>
-    <span class="badge">AWS Cloud learning</span>
-    <span class="badge">BI storytelling & dashboards</span>
-    <span class="badge">Data engineering practice</span>
-  </div>
-
-  <p class="hint" style="margin-top:12px;">
-    If you’re interested in collaboration opportunities, feel free to reach out via LinkedIn or email.
-  </p>
-</div>
-
-<h2>Resume</h2>
-<div class="card">
-  <p style="margin-top:0; color: var(--muted);">
-    Download a copy of my resume.
-  </p>
-  <div class="links" style="margin-top:12px;">
-    <a class="link" href="assets/Anam_Vakil_Resume.pdf" target="_blank" rel="noreferrer">Download resume (PDF)</a>
-  </div>
-  <p class="hint">Upload your resume into the assets folder using the filename above.</p>
-</div>
-    
+    <!-- Contact -->
     <h2>Contact</h2>
     <div class="card">
-      <p>
+      <p style="margin-top:0; color: var(--muted);">
         Best way to reach me is LinkedIn or email.
       </p>
       <p class="hint">
@@ -374,11 +379,12 @@
       </p>
     </div>
 
+    <!-- Footer -->
     <div class="footer">
       <div>© 2025 Anam Vakil</div>
       <div>
         Built with GitHub Pages •
-        <a class="mutedlink" href="https://github.com/anamvakil" target="_blank" rel="noreferrer">View GitHub</a>
+        <a class="mutedlink" href="PASTE_GITHUB_PROFILE_URL" target="_blank" rel="noreferrer">View GitHub</a>
       </div>
     </div>
 
