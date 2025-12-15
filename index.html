@@ -7,18 +7,16 @@
 
   <style>
     :root{
-      /* Base */
       --bg: #0b1220;
       --text: rgba(255,255,255,0.92);
       --muted: rgba(255,255,255,0.70);
       --muted2: rgba(255,255,255,0.55);
       --border: rgba(255,255,255,0.12);
 
-      /* Theme accents (CHANGE THESE TWO to switch theme) */
-      --accent: #fbbf24;   /* amber */
-      --accent2:#f59e0b;   /* deeper amber */
+      /* Theme accents (change these two any time) */
+      --accent: #fbbf24;
+      --accent2:#f59e0b;
 
-      /* Shadows */
       --shadow: 0 10px 30px rgba(0,0,0,0.22);
       --shadowHover: 0 18px 44px rgba(0,0,0,0.35);
     }
@@ -29,10 +27,21 @@
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
       color: var(--text);
+
+      /* ✅ Soft diagonal wash (no circles) */
       background:
-        radial-gradient(900px 500px at 15% 10%, color-mix(in srgb, var(--accent2) 30%, transparent), transparent 60%),
-        radial-gradient(900px 500px at 85% 20%, color-mix(in srgb, var(--accent) 28%, transparent), transparent 60%),
+        linear-gradient(
+          135deg,
+          color-mix(in srgb, var(--accent) 12%, transparent) 0%,
+          transparent 40%
+        ),
+        linear-gradient(
+          315deg,
+          color-mix(in srgb, var(--accent2) 10%, transparent) 0%,
+          transparent 45%
+        ),
         linear-gradient(180deg, #070b14, var(--bg));
+
       line-height: 1.6;
     }
 
@@ -43,15 +52,26 @@
       position: relative;
     }
 
+    /* ✅ Gentle top fade so hero area feels premium */
     .ambient{
       position: absolute;
       inset: 0;
       pointer-events: none;
       background:
-        radial-gradient(650px 420px at 20% 20%, color-mix(in srgb, var(--accent2) 14%, transparent), transparent 60%),
-        radial-gradient(650px 420px at 80% 25%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 60%);
-      opacity: 0.9;
+        linear-gradient(180deg, rgba(255,255,255,0.04), transparent 35%);
     }
+
+    /* ✅ Vignette to center attention (removes “empty sides” feeling) */
+    .wrap::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background: radial-gradient(circle at center, transparent 55%, rgba(0,0,0,0.35) 100%);
+    }
+
+    /* Keep content above ambient layers */
+    .wrap > * { position: relative; z-index: 1; }
 
     .topbar{
       display:flex;
@@ -151,12 +171,7 @@
 
     .section-divider{
       height: 1px;
-      background: linear-gradient(
-        to right,
-        transparent,
-        color-mix(in srgb, var(--accent) 22%, rgba(255,255,255,0.18)),
-        transparent
-      );
+      background: linear-gradient(to right, transparent, rgba(255,255,255,0.18), transparent);
       margin: 26px 0;
     }
 
@@ -172,7 +187,10 @@
 
     .card{
       border: 1px solid var(--border);
-      background: rgba(255,255,255,0.06);
+
+      /* slightly dimmer = blends better with background */
+      background: rgba(255,255,255,0.055);
+
       border-radius: 18px;
       padding: 16px 18px;
       backdrop-filter: blur(10px);
@@ -186,7 +204,7 @@
       transform: translateY(-6px) scale(1.01);
       box-shadow: var(--shadowHover);
       border-color: color-mix(in srgb, var(--accent) 35%, transparent);
-      background: rgba(255,255,255,0.075);
+      background: rgba(255,255,255,0.07);
     }
 
     @media (prefers-reduced-motion: reduce){
