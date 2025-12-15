@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Anam Vakil | Portfoliov3</title>
+  <title>Anam Vakil | Portfolio</title>
 
   <style>
     :root{
@@ -13,7 +13,7 @@
       --muted2: rgba(255,255,255,0.55);
       --border: rgba(255,255,255,0.12);
 
-      /* Theme accents (change these two any time) */
+      /* Accent colors */
       --accent: #fbbf24;
       --accent2:#f59e0b;
 
@@ -21,478 +21,216 @@
       --shadowHover: 0 18px 44px rgba(0,0,0,0.35);
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+    }
 
     body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
       color: var(--text);
-
-      /* ✅ Soft diagonal wash (no circles) */
-      background:
-        linear-gradient(
-          135deg,
-          color-mix(in srgb, var(--accent) 12%, transparent) 0%,
-          transparent 40%
-        ),
-        linear-gradient(
-          315deg,
-          color-mix(in srgb, var(--accent2) 10%, transparent) 0%,
-          transparent 45%
-        ),
-        linear-gradient(180deg, #070b14, var(--bg));
-
-      line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    .wrap{
-      max-width: 1200px;
-      margin: 32px auto;
-      padding: 0 24px;
-      position: relative;
-    }
-
-    /* ✅ Gentle top fade so hero area feels premium */
-.ambient{
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-
-  background:
-    linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px),
-    radial-gradient(circle at 18% 28%, color-mix(in srgb, var(--accent) 45%, transparent), transparent 58%),
-    radial-gradient(circle at 72% 22%, color-mix(in srgb, var(--accent2) 45%, transparent), transparent 60%),
-    radial-gradient(circle at 62% 68%, color-mix(in srgb, var(--accent) 35%, transparent), transparent 62%),
-    radial-gradient(circle at 26% 78%, color-mix(in srgb, var(--accent2) 35%, transparent), transparent 64%),
-    linear-gradient(180deg, rgba(255,255,255,0.05), transparent 40%);
-
-  background-size:
-    48px 48px, 48px 48px,
-    auto, auto, auto, auto,
-    auto;
-
-  opacity: 0.85;
-  filter: blur(0px);
-
-  transform: translate3d(0,0,0);
-  animation: drift 6s ease-in-out infinite;
-}
-
-@keyframes drift {
-  0%   { transform: translate3d(0,0,0); }
-  50%  { transform: translate3d(14px,-10px,0); }
-  100% { transform: translate3d(0,0,0); }
-}
-
-@media (prefers-reduced-motion: reduce){
-  .ambient{ animation: none; }
-}
-
-    /* ✅ Vignette to center attention (removes “empty sides” feeling) */
-    .wrap::after{
+    /* ✅ ACTUAL BACKGROUND */
+    body::before{
       content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      background: radial-gradient(circle at center, transparent 55%, rgba(0,0,0,0.35) 100%);
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(900px 500px at 15% 10%, rgba(251,191,36,0.18), transparent 60%),
+        radial-gradient(700px 420px at 85% 20%, rgba(245,158,11,0.14), transparent 60%),
+        radial-gradient(900px 700px at 45% 90%, rgba(255,255,255,0.08), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,0.02), transparent 40%, rgba(0,0,0,0.25));
     }
 
-    /* Keep content above ambient layers */
-    .wrap > * { position: relative; z-index: 1; }
-
-    .topbar{
-      display:flex;
-      align-items:center;          /* ✅ was flex-start */
-      justify-content:space-between;
-      gap: 16px;
-      margin-bottom: 18px;
+    /* Subtle texture */
+    body::after{
+      content:"";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.08;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
     }
 
-
-    .hero{
-      border: 1px solid var(--border);
-      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
-      border-radius: 18px;
-      padding: 18px 18px;
-      backdrop-filter: blur(10px);
+    /* Layout */
+    main{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 64px 20px 96px;
+      background: transparent;
     }
 
-    .brand h1{
-      margin:0 0 6px 0;
-      font-size: 2.15rem;
+    header{
+      margin-bottom: 64px;
+    }
+
+    h1{
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      margin: 0 0 12px;
       letter-spacing: -0.02em;
     }
 
-    .brand .subtitle{
-      margin:0;
+    h1 span{
+      color: var(--accent);
+    }
+
+    p.lead{
+      font-size: 1.1rem;
       color: var(--muted);
-      font-size: 1.05rem;
+      max-width: 720px;
+      line-height: 1.6;
     }
 
-    .pillrow{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top: 14px;
+    section{
+      margin-top: 64px;
     }
 
-    .pill{
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.05);
-      padding: 8px 12px;
-      border-radius: 999px;
-      color: var(--muted);
-      font-size: 0.92rem;
-      backdrop-filter: blur(10px);
-    }
-
-    .cta{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-      margin-top: 6px;
-    }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding: 10px 14px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.06);
-      color: var(--text);
-      text-decoration:none;
-      font-weight: 600;
-      transition: transform .15s ease, background .15s ease, border-color .15s ease;
-      will-change: transform;
-    }
-
-    .btn:hover{
-      transform: translateY(-1px);
-      background: rgba(255,255,255,0.10);
-      border-color: rgba(255,255,255,0.20);
-    }
-
-    .btn.primary{
-      border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
-      background: linear-gradient(
-        135deg,
-        color-mix(in srgb, var(--accent) 25%, transparent),
-        color-mix(in srgb, var(--accent2) 20%, transparent)
-      );
-    }
-
-    .accent{
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    h2{
-      margin: 22px 0 8px 0;
-      font-size: 1.25rem;
+    section h2{
+      font-size: 1.6rem;
+      margin-bottom: 20px;
       letter-spacing: -0.01em;
     }
 
-    .section-divider{
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(255,255,255,0.18), transparent);
-      margin: 26px 0;
-    }
-
+    /* Cards */
     .grid{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
-    }
-
-    @media (min-width: 860px){
-      .grid{ grid-template-columns: 1.35fr 1fr; }
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
     }
 
     .card{
+      background: rgba(255,255,255,0.04);
       border: 1px solid var(--border);
-
-      /* slightly dimmer = blends better with background */
-      background: rgba(255,255,255,0.055);
-
       border-radius: 18px;
-      padding: 16px 18px;
-      backdrop-filter: blur(10px);
+      padding: 22px;
       box-shadow: var(--shadow);
-      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
-      will-change: transform;
+      backdrop-filter: blur(12px);
+      transition: transform .25s ease, box-shadow .25s ease;
     }
 
-    /* Hover expand */
     .card:hover{
-      transform: translateY(-6px) scale(1.01);
+      transform: translateY(-6px);
       box-shadow: var(--shadowHover);
-      border-color: color-mix(in srgb, var(--accent) 45%, transparent);
-      background: rgba(255,255,255,0.07);
     }
 
-    @media (prefers-reduced-motion: reduce){
-      .card, .btn { transition: none !important; }
-      .card:hover, .btn:hover { transform: none !important; }
-    }
-
-    @media (max-width: 860px){
-      .topbar{
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .cta{
-        justify-content: flex-start;
-      }
-    }
     .card h3{
-      margin: 0 0 8px 0;
-      font-size: 1.08rem;
-      letter-spacing: -0.01em;
+      margin: 0 0 8px;
+      font-size: 1.1rem;
     }
 
     .card p{
-      margin: 0 0 10px 0;
-      color: var(--muted);
-    }
-
-    .badges{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top: 10px;
-    }
-
-    .badge{
-      font-size: 0.88rem;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.05);
-      color: var(--muted);
-    }
-
-    .links{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top: 14px;
-    }
-
-    .link{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding: 9px 12px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.05);
-      color: var(--text);
-      text-decoration:none;
-      font-weight: 600;
-      transition: transform .15s ease, background .15s ease, border-color .15s ease;
-      will-change: transform;
-    }
-
-    .link:hover{
-      transform: translateY(-2px);
-      background: rgba(255,255,255,0.10);
-      border-color: rgba(255,255,255,0.20);
-    }
-
-    .hint{
+      margin: 0;
       color: var(--muted2);
+      line-height: 1.5;
       font-size: 0.95rem;
-      margin-top: 8px;
     }
 
-    .footer{
-      margin-top: 38px;
-      padding-top: 18px;
+    /* Footer */
+    footer{
+      margin-top: 96px;
+      padding-top: 24px;
       border-top: 1px solid var(--border);
       color: var(--muted2);
-      font-size: 0.92rem;
-      display:flex;
-      justify-content:space-between;
+      font-size: 0.9rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
       gap: 12px;
-      flex-wrap:wrap;
     }
 
-    .mutedlink{ color: var(--muted); text-decoration:none; }
-    .mutedlink:hover{ text-decoration:underline; }
+    footer a{
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover{
+      text-decoration: underline;
+    }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="ambient"></div>
 
-    <div class="topbar hero">
-      <div class="brand">
-        <h1><span class="accent">Anam Vakil</span></h1>
-        <p class="subtitle">Business Intelligence • Data Analytics • ML • Cloud</p>
-        <div class="pillrow">
-          <span class="pill">Ottawa, Canada</span>
-          <span class="pill">BISI @ Algonquin College</span>
-          <span class="pill">Open to co-op & projects</span>
-        </div>
-      </div>
+<main>
 
-      <div class="cta">
-        <a class="btn primary" href="PASTE_LINKEDIN_URL" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a class="btn" href="PASTE_GITHUB_PROFILE_URL" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="btn" href="mailto:PASTE_EMAIL">Email</a>
-      </div>
-    </div>
+  <header>
+    <h1>Anam <span>Vakil</span></h1>
+    <p class="lead">
+      Data & Business Intelligence professional focused on analytics, cloud,
+      and building systems that turn raw data into meaningful insight.
+      Currently pursuing Business Intelligence System Infrastructure (BISI).
+    </p>
+  </header>
 
-    <h2>About</h2>
-    <div class="card">
-      <p style="margin-top:0;">
-        I build end-to-end data solutions that connect analytics, engineering, and business decision-making.
-        My focus is on turning analysis into usable deliverables—reliable evaluation, clear documentation,
-        and practical interfaces.
-      </p>
-      <p class="hint">Tip: If you're viewing this from LinkedIn, start with the live demo below.</p>
-    </div>
-
-    <div class="section-divider"></div>
-
-    <h2>Featured projects</h2>
+  <section>
+    <h2>Projects</h2>
     <div class="grid">
       <div class="card">
-        <h3>Customer Churn Prediction (BI + ML + UI)</h3>
+        <h3>Telco Customer Churn</h3>
         <p>
-          Implemented an end-to-end ML pipeline on the Telco Customer Churn dataset and delivered it through
-          an interactive Streamlit UI so predictions can be used beyond a notebook.
+          End-to-end ML pipeline with Logistic Regression & Random Forest,
+          cross-validation, and Streamlit deployment.
         </p>
-
-        <div class="badges">
-          <span class="badge">Python</span>
-          <span class="badge">Pandas</span>
-          <span class="badge">scikit-learn</span>
-          <span class="badge">Streamlit</span>
-          <span class="badge">Model evaluation</span>
-        </div>
-
-        <div class="links">
-          <a class="link" href="PASTE_STREAMLIT_LINK_HERE" target="_blank" rel="noreferrer">Live demo</a>
-          <a class="link" href="PASTE_CHURN_REPO_LINK_HERE" target="_blank" rel="noreferrer">Source code</a>
-          <a class="link" href="assets/churn-report.pdf" target="_blank" rel="noreferrer">IEEE report</a>
-        </div>
-
-        <p class="hint">Includes probability-based risk bands (low/medium/high) and a user-friendly UI.</p>
       </div>
 
       <div class="card">
-        <h3>Data Engineering & Integration (SQL Server)</h3>
+        <h3>National Address Register (GA5)</h3>
         <p>
-          Designed a normalized relational model (3NF), built staging-to-target transformations, and documented the
-          solution with ERD and scripts focused on data quality and performance.
+          Large-scale SQL Server data engineering project with staging,
+          3NF normalization, ERD, and optimized joins.
         </p>
+      </div>
 
-        <div class="badges">
-          <span class="badge">SQL Server</span>
-          <span class="badge">T-SQL</span>
-          <span class="badge">3NF normalization</span>
-          <span class="badge">ETL</span>
-          <span class="badge">ERD</span>
-        </div>
-
-        <div class="links">
-          <a class="link" href="PASTE_DE_PROJECT_LINK_HERE" target="_blank" rel="noreferrer">Project details</a>
-        </div>
-
-        <p class="hint">If you don’t have a link yet, you can leave it for now and add later.</p>
+      <div class="card">
+        <h3>Salesforce Admin Labs</h3>
+        <p>
+          Hands-on configuration, automation, security, and reporting using
+          Salesforce Trailhead.
+        </p>
       </div>
     </div>
+  </section>
 
-    <div class="section-divider"></div>
+  <section>
+    <h2>Skills</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Data & Analytics</h3>
+        <p>SQL Server, Power BI, Python, Pandas, NumPy, EDA</p>
+      </div>
 
-    <h2>Skills & Tools</h2>
-    <div class="card">
-      <p class="hint" style="margin-top:0;">A focused snapshot of the tools and areas I work with.</p>
-      <div class="badges" style="margin-top:12px;">
-        <span class="badge">Python</span>
-        <span class="badge">Pandas</span>
-        <span class="badge">NumPy</span>
-        <span class="badge">scikit-learn</span>
-        <span class="badge">SQL Server</span>
-        <span class="badge">T-SQL</span>
-        <span class="badge">Data Modeling (3NF)</span>
-        <span class="badge">ETL / Data Integration</span>
-        <span class="badge">Streamlit</span>
-        <span class="badge">Data Visualization</span>
-        <span class="badge">AWS Fundamentals</span>
-        <span class="badge">GitHub</span>
+      <div class="card">
+        <h3>Cloud & Platforms</h3>
+        <p>AWS, Salesforce, Snowflake (foundations)</p>
+      </div>
+
+      <div class="card">
+        <h3>Concepts</h3>
+        <p>Data Modeling, 3NF, ML Fundamentals, BI Architecture</p>
       </div>
     </div>
+  </section>
 
-    <div class="section-divider"></div>
-
-    <h2>Certifications & Badges</h2>
-    <div class="card">
-      <p style="margin-top:0; color: var(--muted);">
-        AWS Cloud Foundations (AWS Skill Builder) — Verified via Credly
-      </p>
-      <div class="links" style="margin-top:12px;">
-        <a class="link" href="PASTE_CREDLY_BADGE_LINK_HERE" target="_blank" rel="noreferrer">View badge</a>
-      </div>
+  <footer>
+    <div>© 2025 Anam Vakil</div>
+    <div>
+      <a href="#">LinkedIn</a> ·
+      <a href="#">GitHub</a> ·
+      <a href="#">Email</a>
     </div>
+  </footer>
 
-    <div class="section-divider"></div>
+</main>
 
-    <h2>Currently Working On</h2>
-    <div class="card">
-      <p style="margin-top:0; color: var(--muted);">
-        Building additional BI dashboards and data engineering projects, and continuing AWS cloud learning.
-      </p>
-      <div class="badges" style="margin-top:12px;">
-        <span class="badge">Portfolio projects</span>
-        <span class="badge">BI storytelling</span>
-        <span class="badge">Data engineering practice</span>
-        <span class="badge">AWS learning</span>
-      </div>
-      <p class="hint" style="margin-top:12px;">
-        I’m open to collaboration opportunities where data, engineering, and business come together to create practical impact.
-      </p>
-    </div>
-
-    <div class="section-divider"></div>
-
-    <h2>Resume</h2>
-    <div class="card">
-      <p style="margin-top:0; color: var(--muted);">Download a copy of my resume.</p>
-      <div class="links" style="margin-top:12px;">
-        <a class="link" href="assets/Anam_Vakil_Resume.pdf" target="_blank" rel="noreferrer">Download resume (PDF)</a>
-      </div>
-      <p class="hint">Upload your resume into the <strong>assets</strong> folder using the filename above.</p>
-    </div>
-
-    <div class="section-divider"></div>
-
-    <h2>Contact</h2>
-    <div class="card">
-      <p style="margin-top:0; color: var(--muted);">Best way to reach me is LinkedIn or email.</p>
-      <p class="hint">
-        <a class="mutedlink" href="PASTE_LINKEDIN_URL" target="_blank" rel="noreferrer">LinkedIn</a>
-        •
-        <a class="mutedlink" href="mailto:PASTE_EMAIL">PASTE_EMAIL</a>
-      </p>
-    </div>
-
-    <div class="footer">
-      <div>© 2025 Anam Vakil</div>
-      <div>
-        Built with GitHub Pages •
-        <a class="mutedlink" href="PASTE_GITHUB_PROFILE_URL" target="_blank" rel="noreferrer">View GitHub</a>
-      </div>
-    </div>
-
-  </div>
 </body>
 </html>
