@@ -59,12 +59,12 @@
   pointer-events: none;
 
   background:
-    linear-gradient(to right, rgba(255,255,255,0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px),
-    radial-gradient(circle at 18% 28%, color-mix(in srgb, var(--accent) 24%, transparent), transparent 55%),
-    radial-gradient(circle at 72% 22%, color-mix(in srgb, var(--accent2) 22%, transparent), transparent 58%),
-    radial-gradient(circle at 62% 68%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 60%),
-    radial-gradient(circle at 26% 78%, color-mix(in srgb, var(--accent2) 16%, transparent), transparent 62%),
+    linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px),
+    radial-gradient(circle at 18% 28%, color-mix(in srgb, var(--accent) 45%, transparent), transparent 58%),
+    radial-gradient(circle at 72% 22%, color-mix(in srgb, var(--accent2) 45%, transparent), transparent 60%),
+    radial-gradient(circle at 62% 68%, color-mix(in srgb, var(--accent) 35%, transparent), transparent 62%),
+    radial-gradient(circle at 26% 78%, color-mix(in srgb, var(--accent2) 35%, transparent), transparent 64%),
     linear-gradient(180deg, rgba(255,255,255,0.05), transparent 40%);
 
   background-size:
@@ -72,11 +72,11 @@
     auto, auto, auto, auto,
     auto;
 
-  opacity: 0.55;
-  filter: blur(0.2px);
+  opacity: 0.85;
+  filter: blur(0px);
 
   transform: translate3d(0,0,0);
-  animation: drift 14s ease-in-out infinite;
+  animation: drift 6s ease-in-out infinite;
 }
 
 @keyframes drift {
