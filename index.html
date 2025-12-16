@@ -8,23 +8,27 @@
 
   <style>
     :root{
-      --bg: #0b1220;
+      /* ✅ Brighter, less “dark-blue corner” palette (Slate + Teal + Blue) */
+      --bg: #0f172a;           /* slate */
+      --bg2:#111c33;
       --text: rgba(255,255,255,0.92);
-      --muted: rgba(255,255,255,0.70);
-      --muted2: rgba(255,255,255,0.55);
-      --border: rgba(255,255,255,0.12);
+      --muted: rgba(255,255,255,0.74);
+      --muted2: rgba(255,255,255,0.60);
+      --border: rgba(255,255,255,0.14);
 
-      /* Theme accents */
-      --accent: #fbbf24;
-      --accent2:#f59e0b;
+      --accent: #2dd4bf;       /* teal */
+      --accent2:#60a5fa;       /* blue */
 
       --shadow: 0 10px 30px rgba(0,0,0,0.22);
       --shadowHover: 0 18px 44px rgba(0,0,0,0.35);
       --radius: 18px;
+
+      --navH: 76px;            /* used for scroll offset */
     }
 
     *{ box-sizing: border-box; }
     html, body { height: 100%; }
+    html{ scroll-behavior: smooth; }
 
     body{
       margin: 0;
@@ -34,17 +38,17 @@
       overflow-x: hidden;
     }
 
-    /* ✅ Visible background */
+    /* ✅ Visible, brighter background (less heavy dark corner) */
     body::before{
       content:"";
       position: fixed;
       inset: 0;
       z-index: -2;
       background:
-        radial-gradient(900px 500px at 15% 10%, rgba(251,191,36,0.18), transparent 60%),
-        radial-gradient(700px 420px at 85% 20%, rgba(245,158,11,0.14), transparent 60%),
-        radial-gradient(900px 700px at 45% 90%, rgba(255,255,255,0.08), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,0.02), transparent 40%, rgba(0,0,0,0.25));
+        radial-gradient(1000px 520px at 12% 10%, rgba(45,212,191,0.24), transparent 60%),
+        radial-gradient(900px 520px at 88% 18%, rgba(96,165,250,0.22), transparent 60%),
+        radial-gradient(1100px 820px at 50% 95%, rgba(255,255,255,0.08), transparent 62%),
+        linear-gradient(180deg, rgba(255,255,255,0.03), transparent 35%, rgba(0,0,0,0.28));
     }
     body::after{
       content:"";
@@ -52,7 +56,8 @@
       inset: 0;
       z-index: -1;
       pointer-events: none;
-      opacity: 0.08;
+      opacity: 0.12;
+      mix-blend-mode: overlay;
       background-image:
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
     }
@@ -60,12 +65,12 @@
     .wrap{
       max-width: 1120px;
       margin: 0 auto;
-      padding: 24px 20px 88px;
+      padding: 22px 20px 88px;
       background: transparent;
     }
 
     /* =========================
-       NAV (Context-aware)
+       NAV (desktop + mobile)
        ========================= */
     .nav{
       position: sticky;
@@ -73,7 +78,9 @@
       z-index: 10;
       margin: 14px 0 18px;
     }
+
     .navInner{
+      height: var(--navH);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -81,14 +88,14 @@
       padding: 12px 14px;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: rgba(10, 15, 28, 0.55);
+      background: rgba(17, 28, 51, 0.62); /* ✅ lighter than before */
       backdrop-filter: blur(14px);
       box-shadow: var(--shadow);
       transition: background .25s ease, border-color .25s ease, box-shadow .25s ease;
     }
     .navInner.scrolled{
-      background: rgba(10, 15, 28, 0.72);
-      border-color: rgba(255,255,255,0.16);
+      background: rgba(17, 28, 51, 0.80);
+      border-color: rgba(255,255,255,0.18);
       box-shadow: 0 16px 40px rgba(0,0,0,0.35);
     }
 
@@ -100,12 +107,13 @@
       font-weight: 800;
       letter-spacing: -0.02em;
       white-space: nowrap;
+      color: var(--text);
     }
     .dot{
       width: 12px; height: 12px;
       border-radius: 99px;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
-      box-shadow: 0 0 18px rgba(251,191,36,0.35);
+      box-shadow: 0 0 18px rgba(45,212,191,0.30);
     }
 
     .links{
@@ -121,34 +129,87 @@
       font-size: 0.95rem;
       padding: 8px 10px;
       border-radius: 999px;
-      transition: background .2s ease, color .2s ease, border-color .2s ease;
+      transition: background .2s ease, color .2s ease, border-color .2s ease, transform .15s ease;
       border: 1px solid transparent;
     }
     .links a:hover{
       background: rgba(255,255,255,0.06);
       color: var(--text);
+      transform: translateY(-1px);
     }
     .links a[data-nav].active{
       color: var(--text);
       background: rgba(255,255,255,0.08);
       border-color: rgba(255,255,255,0.16);
-      box-shadow: 0 0 0 1px rgba(251,191,36,0.14) inset;
+      box-shadow: 0 0 0 1px rgba(45,212,191,0.16) inset;
     }
 
-    /* Sticky CTA in nav */
+    /* CTA */
     .navCta{
       margin-left: 6px;
       text-decoration: none;
       border-radius: 999px;
       padding: 9px 12px;
-      border: 1px solid rgba(251,191,36,0.35);
-      background: linear-gradient(135deg, rgba(251,191,36,0.22), rgba(245,158,11,0.10));
+      border: 1px solid rgba(45,212,191,0.35);
+      background: linear-gradient(135deg, rgba(45,212,191,0.22), rgba(96,165,250,0.12));
       color: var(--text);
       font-weight: 800;
       white-space: nowrap;
     }
-    .navCta:hover{
-      transform: translateY(-1px);
+    .navCta:hover{ transform: translateY(-1px); }
+
+    /* Mobile burger */
+    .burger{
+      display:none;
+      width: 46px; height: 46px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      cursor: pointer;
+    }
+    .burger span{
+      display:block; width:18px; height:2px;
+      background: rgba(255,255,255,0.85);
+      position: relative;
+      margin: 0 auto;
+    }
+    .burger span::before,
+    .burger span::after{
+      content:"";
+      position:absolute; left:0;
+      width:18px; height:2px;
+      background: rgba(255,255,255,0.85);
+    }
+    .burger span::before{ top:-6px; }
+    .burger span::after{ top: 6px; }
+
+    .mobileMenu{
+      display:none;
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: rgba(17, 28, 51, 0.80);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+    }
+    .mobileMenu.open{ display:flex; }
+    .mobileMenu{
+      flex-direction: column;
+      gap: 8px;
+    }
+    .mobileMenu a{
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      color: var(--muted);
+      background: rgba(255,255,255,0.04);
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .mobileMenu a:hover{
+      color: var(--text);
+      background: rgba(255,255,255,0.08);
     }
 
     /* =========================
@@ -160,15 +221,23 @@
       gap: 22px;
       align-items: stretch;
       margin-top: 18px;
+      position: relative;
     }
-    @media (max-width: 900px){
-      .hero{ grid-template-columns: 1fr; }
-      .navInner{ border-radius: 22px; }
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:-28px;
+      z-index:-1;
+      background:
+        radial-gradient(780px 460px at 30% 25%, rgba(45,212,191,0.18), transparent 60%),
+        radial-gradient(720px 460px at 80% 55%, rgba(96,165,250,0.14), transparent 62%);
+      filter: blur(16px);
+      opacity: 0.95;
     }
 
     .card{
       border: 1px solid var(--border);
-      background: rgba(255,255,255,0.04);
+      background: rgba(255,255,255,0.06); /* ✅ slightly brighter */
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       backdrop-filter: blur(12px);
@@ -209,12 +278,12 @@
       color: var(--text);
       transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
       box-shadow: 0 10px 24px rgba(0,0,0,0.20);
-      font-weight: 700;
+      font-weight: 800;
     }
     .btn:hover{ transform: translateY(-2px); }
     .btn.primary{
-      border: 1px solid rgba(251,191,36,0.35);
-      background: linear-gradient(135deg, rgba(251,191,36,0.20), rgba(245,158,11,0.10));
+      border: 1px solid rgba(45,212,191,0.38);
+      background: linear-gradient(135deg, rgba(45,212,191,0.20), rgba(96,165,250,0.10));
     }
 
     .meta{
@@ -227,9 +296,12 @@
     }
     .pill{
       border: 1px solid var(--border);
-      background: rgba(255,255,255,0.03);
+      background: rgba(255,255,255,0.04);
       padding: 8px 10px;
       border-radius: 999px;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
     }
 
     .heroSide{
@@ -241,8 +313,8 @@
     .mini{
       padding: 16px;
       border-radius: 14px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(0,0,0,0.12);
     }
     .mini h3{
       margin: 0 0 6px;
@@ -255,13 +327,13 @@
       line-height: 1.45;
       font-size: 0.95rem;
     }
-    .mini a{ color: var(--accent); text-decoration: none; font-weight: 700; }
+    .mini a{ color: var(--accent); text-decoration: none; font-weight: 800; }
     .mini a:hover{ text-decoration: underline; }
 
     /* =========================
        SECTIONS
        ========================= */
-    section{ margin-top: 54px; scroll-margin-top: 110px; }
+    section{ margin-top: 54px; scroll-margin-top: calc(var(--navH) + 30px); }
 
     .sectionTitle{
       display:flex;
@@ -289,9 +361,6 @@
     .col4{ grid-column: span 4; }
     .col8{ grid-column: span 8; }
     .col12{ grid-column: span 12; }
-    @media (max-width: 900px){
-      .col6, .col4, .col8{ grid-column: span 12; }
-    }
 
     .block{ padding: 20px; }
     .block h3{ margin: 0 0 8px; font-size: 1.05rem; }
@@ -311,9 +380,9 @@
     }
     .tag{
       font-size: 0.9rem;
-      color: var(--muted);
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.03);
+      color: rgba(255,255,255,0.74);
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.04);
       padding: 8px 10px;
       border-radius: 999px;
     }
@@ -324,11 +393,13 @@
       display:flex;
       flex-direction: column;
       gap: 10px;
-      transition: transform .25s ease, box-shadow .25s ease;
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+      background: rgba(255,255,255,0.06);
     }
     .proj:hover{
       transform: translateY(-6px);
       box-shadow: var(--shadowHover);
+      background: rgba(255,255,255,0.08);
     }
     .proj .top{
       display:flex;
@@ -339,9 +410,9 @@
     .proj h3{ margin: 0; }
     .proj .badge{
       font-size: 0.85rem;
-      color: rgba(255,255,255,0.85);
-      border: 1px solid rgba(251,191,36,0.25);
-      background: rgba(251,191,36,0.10);
+      color: rgba(255,255,255,0.88);
+      border: 1px solid rgba(45,212,191,0.25);
+      background: rgba(45,212,191,0.10);
       padding: 6px 10px;
       border-radius: 999px;
       white-space: nowrap;
@@ -355,7 +426,7 @@
     .proj .linksRow a{
       text-decoration:none;
       color: var(--accent);
-      font-weight: 800;
+      font-weight: 900;
       font-size: 0.95rem;
     }
     .proj .linksRow a:hover{ text-decoration: underline; }
@@ -372,6 +443,35 @@
     }
     .small{ font-size: 0.92rem; color: var(--muted2); }
     .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+
+    /* =========================
+       RESPONSIVE (Mobile-friendly)
+       ========================= */
+    @media (max-width: 980px){
+      .hero{ grid-template-columns: 1fr; }
+      .navInner{ border-radius: 22px; height: auto; padding: 12px 14px; }
+    }
+
+    @media (max-width: 900px){
+      .col6, .col4, .col8{ grid-column: span 12; }
+      .wrap{ padding: 18px 14px 70px; }
+      .heroMain{ padding: 20px; }
+      .heroSide{ padding: 14px; }
+    }
+
+    @media (max-width: 760px){
+      :root{ --navH: 64px; }
+
+      /* hide desktop links, show burger */
+      #navLinks{ display:none; }
+      .burger{ display:flex; align-items:center; justify-content:center; }
+
+      h1{ font-size: clamp(1.8rem, 7vw, 2.4rem); }
+      .sub{ font-size: 1rem; }
+
+      .ctaRow .btn{ width: 100%; }   /* buttons full width */
+      .meta .pill{ width: 100%; }    /* pills stacked */
+    }
   </style>
 </head>
 
@@ -386,6 +486,7 @@
           <span>Anam Vakil</span>
         </a>
 
+        <!-- Desktop links -->
         <div class="links" id="navLinks">
           <a href="#about" data-nav>About</a>
           <a href="#skills" data-nav>Skills</a>
@@ -395,10 +496,26 @@
           <a href="#certs" data-nav>Certifications</a>
           <a href="#contact" data-nav>Contact</a>
 
-          <!-- ✅ Always-visible CTA -->
-          <!-- Replace href with your real PDF path later e.g. href="Anam_Vakil_Resume.pdf" -->
+          <!-- ✅ Replace href later: e.g. href="Anam_Vakil_Resume.pdf" -->
           <a class="navCta" href="#" download>Download Resume</a>
         </div>
+
+        <!-- Mobile burger -->
+        <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
+          <span></span>
+        </button>
+      </div>
+
+      <!-- Mobile menu -->
+      <div class="mobileMenu" id="mobileMenu">
+        <a href="#about" data-nav>About</a>
+        <a href="#skills" data-nav>Skills</a>
+        <a href="#projects" data-nav>Projects</a>
+        <a href="#experience" data-nav>Experience</a>
+        <a href="#education" data-nav>Education</a>
+        <a href="#certs" data-nav>Certifications</a>
+        <a href="#contact" data-nav>Contact</a>
+        <a class="navCta" href="#" download>Download Resume</a>
       </div>
     </div>
 
@@ -414,7 +531,7 @@
         <div class="ctaRow">
           <a class="btn primary" href="#projects">View Projects</a>
           <a class="btn" href="#contact">Contact Me</a>
-          <!-- Replace # with your real resume file -->
+          <!-- ✅ Replace # with your real resume file -->
           <a class="btn" href="#" download>Download Resume</a>
         </div>
 
@@ -437,8 +554,8 @@
         <div class="mini">
           <h3>Quick Links</h3>
           <p>
-            LinkedIn: <a href="#">add link</a><br/>
-            GitHub: <a href="#">add link</a>
+            LinkedIn: <a href="#" target="_blank" rel="noreferrer">add link</a><br/>
+            GitHub: <a href="#" target="_blank" rel="noreferrer">add link</a>
           </p>
         </div>
       </div>
@@ -538,8 +655,8 @@
             <span class="tag">Streamlit</span>
           </div>
           <div class="linksRow">
-            <a href="#">GitHub</a>
-            <a href="#">Case Study</a>
+            <a href="#" target="_blank" rel="noreferrer">GitHub</a>
+            <a href="#" target="_blank" rel="noreferrer">Case Study</a>
           </div>
         </div>
 
@@ -559,9 +676,9 @@
             <span class="tag">ERD</span>
           </div>
           <div class="linksRow">
-            <a href="#">SQL Scripts</a>
-            <a href="#">ERD</a>
-            <a href="#">Report</a>
+            <a href="#" target="_blank" rel="noreferrer">SQL Scripts</a>
+            <a href="#" target="_blank" rel="noreferrer">ERD</a>
+            <a href="#" target="_blank" rel="noreferrer">Report</a>
           </div>
         </div>
       </div>
@@ -656,8 +773,8 @@
         <div class="card block col6">
           <h3>Social</h3>
           <ul>
-            <li><a href="#" style="color:var(--accent); text-decoration:none; font-weight:800;">LinkedIn</a></li>
-            <li><a href="#" style="color:var(--accent); text-decoration:none; font-weight:800;">GitHub</a></li>
+            <li><a href="#" target="_blank" rel="noreferrer" style="color:var(--accent); text-decoration:none; font-weight:900;">LinkedIn</a></li>
+            <li><a href="#" target="_blank" rel="noreferrer" style="color:var(--accent); text-decoration:none; font-weight:900;">GitHub</a></li>
           </ul>
         </div>
       </div>
@@ -665,13 +782,13 @@
 
     <footer>
       <div>© <span class="mono">2025</span> Anam Vakil</div>
-      <div class="small">Data Analyst Portfolio • Sticky nav + active section ✅</div>
+      <div class="small">Mobile-friendly nav ✅ • Responsive layout ✅ • Brighter palette ✅</div>
     </footer>
 
   </div>
 
   <!-- =========================
-       JS: Context-aware nav
+       JS: Context-aware nav + mobile menu
        ========================= -->
   <script>
     // 1) Stronger blur when scrolled
@@ -683,7 +800,7 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
-    // 2) Highlight active section link while scrolling
+    // 2) Highlight active section link while scrolling (desktop + mobile)
     const navLinks = Array.from(document.querySelectorAll('a[data-nav]'));
     const sections = navLinks
       .map(a => document.querySelector(a.getAttribute('href')))
@@ -730,6 +847,24 @@
       if (document.getElementById(id)) setActiveById(id);
     } else if (sections[0]?.id) {
       setActiveById(sections[0].id);
+    }
+
+    // 3) Mobile menu toggle + close on click
+    const burger = document.getElementById('burger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    if (burger && mobileMenu) {
+      burger.addEventListener('click', () => {
+        const isOpen = mobileMenu.classList.toggle('open');
+        burger.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      mobileMenu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          mobileMenu.classList.remove('open');
+          burger.setAttribute('aria-expanded', 'false');
+        });
+      });
     }
   </script>
 </body>
