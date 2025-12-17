@@ -446,50 +446,52 @@
 
         /* ===== Sticky Scroll Card Stack (Projects) ===== */
         /* ===== Projects: Vertical Snap Slider (like your screenshot) ===== */
-    .projSlider { padding-top: 24px; }
+    /* ===== Overlapping Project Deck (like your screenshot) ===== */
+    .projDeck { padding-top: 24px; }
     
-    .sliderFrame{
+    .deckFrame{
       border: 1px solid var(--border);
       border-radius: 26px;
       background: rgba(255,255,255,0.03);
       box-shadow: var(--shadow);
-      padding: 14px;
+      padding: 16px;
     }
     
-    .slider{
-      height: min(72vh, 640px);          /* “laptop screen” height */
-      overflow-y: auto;
-      scroll-snap-type: y mandatory;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-      border-radius: 18px;
-      padding: 8px;
+    .deck{
+      position: relative;
     }
     
-    .slide{
-      scroll-snap-align: start;
-      min-height: calc(min(72vh, 640px) - 16px);  /* fill the viewer */
-      display: grid;
-      align-items: center;
-      padding: 10px;
+    /* Each item creates scroll space */
+    .deckItem{
+      height: 420px; /* controls overlap spacing */
     }
     
-    .slide .card{
-      height: 100%;
-      display: grid;
-      align-content: start;
+    /* Sticky overlapping card */
+    .deckItem .card{
+      position: sticky;
+      top: 92px;     /* adjust based on navbar */
+      height: 360px;
+      z-index: 1;
     }
     
-    /* Optional “video feel” */
-    .slide{
-      opacity: 0.55;
-      transform: scale(0.96);
-      transition: transform 220ms ease, opacity 220ms ease;
+    /* Offset each card so layers are visible */
+    .deckItem:nth-child(1) .card{ margin-top: 0; }
+    .deckItem:nth-child(2) .card{ margin-top: 28px; }
+    .deckItem:nth-child(3) .card{ margin-top: 56px; }
+    .deckItem:nth-child(4) .card{ margin-top: 84px; }
+    .deckItem:nth-child(5) .card{ margin-top: 112px; }
+    
+    /* Mobile: disable stack */
+    @media (max-width: 820px){
+      .deckItem{ height: auto; }
+      .deckItem .card{
+        position: relative;
+        top: auto;
+        height: auto;
+        margin-top: 0 !important;
+      }
     }
-    .slide.isActive{
-      opacity: 1;
-      transform: scale(1);
-    }
+
 
 
     /* =========================
@@ -682,24 +684,26 @@
 
     <!-- PROJECTS -->
    <!-- PROJECTS (Sticky Scroll Card Stack) -->
-<section id="projects" class="projSlider">
+<!-- PROJECTS (Overlapping Deck like your screenshot) -->
+<section id="projects" class="projDeck">
   <div class="sectionTitle">
     <h2>Projects</h2>
-    <div class="hint">Scroll / swipe inside the frame</div>
+    <div class="hint">Scroll to explore</div>
   </div>
 
-  <div class="sliderFrame">
-    <div class="slider" id="projectSlider">
+  <div class="deckFrame">
+    <div class="deck">
 
-      <!-- SLIDE 1 -->
-      <article class="slide">
+      <!-- 01 -->
+      <div class="deckItem">
         <div class="card proj">
-          <!-- your existing Telco card content here -->
           <div class="top">
             <h3>Telco Customer Churn Prediction</h3>
             <span class="badge">Python • ML</span>
           </div>
-          <p>Built a churn prediction workflow with model evaluation and cross-validation, plus a simple app interface.</p>
+          <p>
+            Built a churn prediction workflow with model evaluation and cross-validation, plus a simple app interface.
+          </p>
           <div class="tags">
             <span class="tag">Logistic Regression</span>
             <span class="tag">Cross-validation</span>
@@ -712,17 +716,19 @@
             <a href="https://github.com/anamvakil/Telco-Churn-Prediction/blob/main/notebooks/app/report/Vakil_Anam_BI_IEEE_Report.pdf" target="_blank" rel="noreferrer">IEEE Report (PDF)</a>
           </div>
         </div>
-      </article>
+      </div>
 
-      <!-- SLIDE 2 -->
-      <article class="slide">
+      <!-- 02 -->
+      <div class="deckItem">
         <div class="card proj">
-          <!-- GA5 NAR -->
           <div class="top">
             <h3>National Address Register (GA5)</h3>
             <span class="badge">SQL • Data Engineering</span>
           </div>
-          <p>Designed staging + normalized schema and developed scripts for loading and transforming large datasets while maintaining referential integrity.</p>
+          <p>
+            Designed staging + normalized schema and developed scripts for loading and transforming large datasets
+            while maintaining referential integrity.
+          </p>
           <div class="tags">
             <span class="tag">Staging Table</span>
             <span class="tag">3NF Schema</span>
@@ -735,16 +741,18 @@
             <a href="#" target="_blank" rel="noreferrer">Report</a>
           </div>
         </div>
-      </article>
+      </div>
 
-      <!-- SLIDE 3 -->
-      <article class="slide">
+      <!-- 03 -->
+      <div class="deckItem">
         <div class="card proj">
           <div class="top">
             <h3>Power BI Dashboard (Data Visualization)</h3>
             <span class="badge">Power BI • BI</span>
           </div>
-          <p>Built an interactive Power BI dashboard with KPI cards, slicers, and trend visuals to support decision-ready insights.</p>
+          <p>
+            Built an interactive Power BI dashboard with KPI cards, slicers, and trend visuals to support decision-ready insights.
+          </p>
           <div class="tags">
             <span class="tag">Power BI</span>
             <span class="tag">DAX</span>
@@ -757,16 +765,18 @@
             <a href="#" target="_blank" rel="noreferrer">Screenshots</a>
           </div>
         </div>
-      </article>
+      </div>
 
-      <!-- SLIDE 4 -->
-      <article class="slide">
+      <!-- 04 -->
+      <div class="deckItem">
         <div class="card proj">
           <div class="top">
             <h3>Crime Hotspot Detection — Ottawa</h3>
             <span class="badge">Python • Analytics</span>
           </div>
-          <p>Analyzed Ottawa crime incident data to identify geographic and time-based hotspots using EDA and visualization.</p>
+          <p>
+            Analyzed Ottawa crime incident data to identify geographic and time-based hotspots using EDA and visualization.
+          </p>
           <div class="tags">
             <span class="tag">Pandas</span>
             <span class="tag">EDA</span>
@@ -779,16 +789,18 @@
             <a href="#" target="_blank" rel="noreferrer">Visuals</a>
           </div>
         </div>
-      </article>
+      </div>
 
-      <!-- SLIDE 5 -->
-      <article class="slide">
+      <!-- 05 -->
+      <div class="deckItem">
         <div class="card proj">
           <div class="top">
             <h3>Employee Absenteeism Analysis (Star Schema)</h3>
             <span class="badge">SQL • Data Warehouse</span>
           </div>
-          <p>Designed a multidimensional (star schema) model for absenteeism reporting, using fact and dimension tables for analytics-ready queries.</p>
+          <p>
+            Designed a multidimensional (star schema) model for absenteeism reporting, using fact and dimension tables for analytics-ready queries.
+          </p>
           <div class="tags">
             <span class="tag">Star Schema</span>
             <span class="tag">Fact &amp; Dimensions</span>
@@ -801,7 +813,7 @@
             <a href="#" target="_blank" rel="noreferrer">Star Schema</a>
           </div>
         </div>
-      </article>
+      </div>
 
     </div>
   </div>
