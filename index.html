@@ -1,241 +1,941 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Anam Vakil | Portfolio</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Anam Vakil | Portfolio</title>
+  <meta name="description" content="Anam Vakil — Data Analyst portfolio. Projects, skills, experience, education, and contact." />
 
-<style>
-:root{
-  --bg:#0f172a;
-  --text:rgba(255,255,255,.92);
-  --muted:rgba(255,255,255,.7);
-  --border:rgba(255,255,255,.14);
-  --accent:#2dd4bf;
-  --accent2:#60a5fa;
-  --shadow:0 10px 30px rgba(0,0,0,.35);
-  --radius:18px;
-}
+  <style>
+    :root{
+      --bg: #0f172a;
+      --bg2:#111c33;
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.74);
+      --muted2: rgba(255,255,255,0.60);
+      --border: rgba(255,255,255,0.14);
 
-*{box-sizing:border-box}
-html,body{margin:0}
-body{
-  font-family:system-ui,Segoe UI,Roboto,Arial;
-  background:var(--bg);
-  color:var(--text);
-}
+      --accent: #2dd4bf;
+      --accent2:#60a5fa;
 
-.wrap{
-  max-width:1100px;
-  margin:auto;
-  padding:40px 20px 80px;
-}
+      --shadow: 0 10px 30px rgba(0,0,0,0.22);
+      --shadowHover: 0 18px 44px rgba(0,0,0,0.35);
+      --radius: 18px;
 
-h1,h2,h3{margin:0}
-p{color:var(--muted);line-height:1.6}
+      --navH: 76px;
 
-.card{
-  background:rgba(255,255,255,.06);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-  backdrop-filter:blur(10px);
-}
+      /* projects stack tuning */
+      --projCardH: 360px;
+      --projFrameH: min(78vh, 720px);
+      --stackGap: 18px; /* how much of each next card you see */
+    }
 
-/* ===============================
-   PROJECT STACK (THE MAGIC)
-   =============================== */
+    *{ box-sizing: border-box; }
+    html, body { height: 100%; }
+    html{ scroll-behavior: smooth; }
 
-.projDeck{margin-top:60px}
+    body{
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
 
-.deckFrame{
-  height:75vh;                     /* SCROLL AREA */
-  max-height:720px;
-  border-radius:26px;
-  border:1px solid var(--border);
-  padding:18px;
-  overflow-y:auto;
-  overflow-x:hidden;
-  background:rgba(255,255,255,.03);
-}
+    body::before{
+      content:"";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(1000px 520px at 12% 10%, rgba(45,212,191,0.24), transparent 60%),
+        radial-gradient(900px 520px at 88% 18%, rgba(96,165,250,0.22), transparent 60%),
+        radial-gradient(1100px 820px at 50% 95%, rgba(255,255,255,0.08), transparent 62%),
+        linear-gradient(180deg, rgba(255,255,255,0.03), transparent 35%, rgba(0,0,0,0.28));
+    }
+    body::after{
+      content:"";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.12;
+      mix-blend-mode: overlay;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+    }
 
-.deck{
-  position:relative;
-}
+    .wrap{
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 22px 20px 88px;
+      background: transparent;
+    }
 
-/* scroll length per card */
-.deckItem{
-  height:320px;
-}
+    /* NAV */
+    .nav{
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      margin: 14px 0 18px;
+    }
 
-/* sticky cards */
-.deckItem .proj{
-  position:sticky;
-  top:16px;
-  height:360px;
-  padding:22px;
-}
+    .navInner{
+      height: var(--navH);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(17, 28, 51, 0.62);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+      transition: background .25s ease, border-color .25s ease, box-shadow .25s ease;
+    }
+    .navInner.scrolled{
+      background: rgba(17, 28, 51, 0.80);
+      border-color: rgba(255,255,255,0.18);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+    }
 
-/* stacking offsets */
-.deckItem:nth-child(1){padding-top:0}
-.deckItem:nth-child(2){padding-top:28px}
-.deckItem:nth-child(3){padding-top:56px}
-.deckItem:nth-child(4){padding-top:84px}
-.deckItem:nth-child(5){padding-top:112px}
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      color: var(--text);
+    }
+    .dot{
+      width: 12px; height: 12px;
+      border-radius: 99px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 18px rgba(45,212,191,0.30);
+    }
 
-/* IMPORTANT: later cards ABOVE earlier cards */
-.deckItem:nth-child(1) .proj{z-index:10}
-.deckItem:nth-child(2) .proj{z-index:20}
-.deckItem:nth-child(3) .proj{z-index:30}
-.deckItem:nth-child(4) .proj{z-index:40}
-.deckItem:nth-child(5) .proj{z-index:50}
+    .links{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-items: center;
+    }
+    .links a{
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.95rem;
+      padding: 8px 10px;
+      border-radius: 999px;
+      transition: background .2s ease, color .2s ease, border-color .2s ease, transform .15s ease;
+      border: 1px solid transparent;
+    }
+    .links a:hover{
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+    .links a[data-nav].active{
+      color: var(--text);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.16);
+      box-shadow: 0 0 0 1px rgba(45,212,191,0.16) inset;
+    }
 
-/* project layout */
-.proj .top{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-}
-.badge{
-  border:1px solid rgba(45,212,191,.4);
-  padding:6px 10px;
-  border-radius:999px;
-  font-size:.85rem;
-}
-.tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-.tag{
-  border:1px solid var(--border);
-  padding:6px 10px;
-  border-radius:999px;
-  font-size:.85rem;
-}
-.linksRow{margin-top:auto;display:flex;gap:12px}
-.linksRow a{color:var(--accent);font-weight:700;text-decoration:none}
+    .navCta{
+      margin-left: 6px;
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 9px 12px;
+      border: 1px solid rgba(45,212,191,0.35);
+      background: linear-gradient(135deg, rgba(45,212,191,0.22), rgba(96,165,250,0.12));
+      color: var(--text);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .navCta:hover{ transform: translateY(-1px); }
 
-/* Disable hover lift inside stack */
-.projDeck .proj:hover{transform:none}
+    .burger{
+      display:none;
+      width: 46px; height: 46px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      cursor: pointer;
+    }
+    .burger span{
+      display:block; width:18px; height:2px;
+      background: rgba(255,255,255,0.85);
+      position: relative;
+      margin: 0 auto;
+    }
+    .burger span::before,
+    .burger span::after{
+      content:"";
+      position:absolute; left:0;
+      width:18px; height:2px;
+      background: rgba(255,255,255,0.85);
+    }
+    .burger span::before{ top:-6px; }
+    .burger span::after{ top: 6px; }
 
-/* Mobile fallback */
-@media(max-width:820px){
-  .deckFrame{height:auto;overflow:visible}
-  .deckItem{height:auto;padding-top:0!important}
-  .deckItem .proj{
-    position:relative;
-    top:auto;
-    height:auto;
-  }
-}
-</style>
+    .mobileMenu{
+      display:none;
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: rgba(17, 28, 51, 0.80);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+    }
+    .mobileMenu.open{ display:flex; }
+    .mobileMenu{ flex-direction: column; gap: 8px; }
+    .mobileMenu a{
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      color: var(--muted);
+      background: rgba(255,255,255,0.04);
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .mobileMenu a:hover{
+      color: var(--text);
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* HERO */
+    .hero{
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 22px;
+      align-items: stretch;
+      margin-top: 18px;
+      position: relative;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:-28px;
+      z-index:-1;
+      background:
+        radial-gradient(780px 460px at 30% 25%, rgba(45,212,191,0.18), transparent 60%),
+        radial-gradient(720px 460px at 80% 55%, rgba(96,165,250,0.14), transparent 62%);
+      filter: blur(16px);
+      opacity: 0.95;
+    }
+
+    .card{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .heroMain{ padding: 28px; }
+    h1{
+      margin: 0 0 10px;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+    }
+    .accent{ color: var(--accent); }
+    .sub{
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.55;
+      max-width: 62ch;
+    }
+
+    .ctaRow{
+      display:flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      text-decoration:none;
+      border-radius: 999px;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.20);
+      font-weight: 800;
+    }
+    .btn:hover{ transform: translateY(-2px); }
+    .btn.primary{
+      border: 1px solid rgba(45,212,191,0.38);
+      background: linear-gradient(135deg, rgba(45,212,191,0.20), rgba(96,165,250,0.10));
+    }
+
+    .meta{
+      margin-top: 18px;
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      color: var(--muted2);
+      font-size: 0.92rem;
+    }
+    .pill{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      padding: 8px 10px;
+      border-radius: 999px;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+    }
+
+    .heroSide{
+      padding: 18px;
+      display:flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .mini{
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(0,0,0,0.12);
+    }
+    .mini h3{ margin: 0 0 6px; font-size: 1rem; }
+    .mini p{ margin: 0; color: var(--muted2); line-height: 1.45; font-size: 0.95rem; }
+    .mini a{ color: var(--accent); text-decoration: none; font-weight: 800; }
+    .mini a:hover{ text-decoration: underline; }
+
+    /* SECTIONS */
+    section{ margin-top: 54px; scroll-margin-top: calc(var(--navH) + 30px); }
+
+    .sectionTitle{
+      display:flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    h2{ margin: 0; font-size: 1.55rem; letter-spacing: -0.02em; }
+    .hint{ color: var(--muted2); font-size: 0.95rem; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+    }
+    .col6{ grid-column: span 6; }
+    .col4{ grid-column: span 4; }
+    .col8{ grid-column: span 8; }
+    .col12{ grid-column: span 12; }
+
+    .block{ padding: 20px; }
+    .block h3{ margin: 0 0 8px; font-size: 1.05rem; }
+    .block p, .block li{ color: var(--muted); line-height: 1.6; margin: 0; font-size: 0.98rem; }
+    .block ul{ margin: 10px 0 0; padding-left: 18px; }
+
+    .tags{ display:flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .tag{
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.74);
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.04);
+      padding: 8px 10px;
+      border-radius: 999px;
+    }
+
+    /* Project cards */
+    .proj{
+      padding: 20px;
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+      background: rgba(255,255,255,0.06);
+    }
+    .proj:hover{
+      transform: translateY(-6px);
+      box-shadow: var(--shadowHover);
+      background: rgba(255,255,255,0.08);
+    }
+    .proj .top{
+      display:flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .proj h3{ margin: 0; }
+    .proj .badge{
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.88);
+      border: 1px solid rgba(45,212,191,0.25);
+      background: rgba(45,212,191,0.10);
+      padding: 6px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .proj .linksRow{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+    .proj .linksRow a{
+      text-decoration:none;
+      color: var(--accent);
+      font-weight: 900;
+      font-size: 0.95rem;
+    }
+    .proj .linksRow a:hover{ text-decoration: underline; }
+
+    footer{
+      margin-top: 80px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border);
+      color: var(--muted2);
+      display:flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .small{ font-size: 0.92rem; color: var(--muted2); }
+    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+
+    /* =========================
+       ✅ PROJECTS: SCROLL INSIDE + STACK ON TOP + VISIBLE SLIDE
+       ========================= */
+    .projDeck { padding-top: 24px; }
+
+    .deckFrame{
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      background: rgba(255,255,255,0.03);
+      box-shadow: var(--shadow);
+      padding: 16px;
+
+      height: var(--projFrameH);
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+    }
+
+    .deck{
+      position: relative;
+      padding-bottom: 220px; /* gives extra scroll room so last card slides too */
+    }
+
+    .deckItem{
+      height: 280px; /* smaller than card height => obvious sliding */
+      position: relative;
+    }
+
+    /* Key trick: each card has a different sticky top */
+    .projDeck .deckItem > .card.proj{
+      position: sticky;
+      top: calc(14px + (var(--i) * var(--stackGap)));
+      height: var(--projCardH);
+      z-index: calc(10 + (var(--i) * 10));
+      transform: none;
+    }
+
+    /* Disable hover lift inside frame (it fights the illusion) */
+    .projDeck .proj:hover{
+      transform: none;
+      background: rgba(255,255,255,0.08);
+      box-shadow: var(--shadowHover);
+    }
+
+    /* Mobile: disable stacked frame */
+    @media (max-width: 820px){
+      .deckFrame{ height: auto; overflow: visible; }
+      .deck{ padding-bottom: 0; }
+      .deckItem{ height: auto; }
+      .projDeck .deckItem > .card.proj{
+        position: relative;
+        top: auto;
+        height: auto;
+      }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 980px){
+      .hero{ grid-template-columns: 1fr; }
+      .navInner{ border-radius: 22px; height: auto; padding: 12px 14px; }
+    }
+    @media (max-width: 900px){
+      .col6, .col4, .col8{ grid-column: span 12; }
+      .wrap{ padding: 18px 14px 70px; }
+      .heroMain{ padding: 20px; }
+      .heroSide{ padding: 14px; }
+    }
+    @media (max-width: 760px){
+      :root{ --navH: 64px; }
+      #navLinks{ display:none; }
+      .burger{ display:flex; align-items:center; justify-content:center; }
+      h1{ font-size: clamp(1.8rem, 7vw, 2.4rem); }
+      .sub{ font-size: 1rem; }
+      .ctaRow .btn{ width: 100%; }
+      .meta .pill{ width: 100%; }
+    }
+  </style>
 </head>
 
 <body>
-<div class="wrap">
+  <div class="wrap">
 
-<h1>Projects</h1>
-<p>Scroll inside the box 👇</p>
+    <!-- NAV -->
+    <div class="nav">
+      <div class="navInner">
+        <a class="brand" href="#top">
+          <span class="dot" aria-hidden="true"></span>
+          <span>Anam Vakil</span>
+        </a>
 
-<section class="projDeck">
-  <div class="deckFrame">
-    <div class="deck">
+        <div class="links" id="navLinks">
+          <a href="#about" data-nav>About</a>
+          <a href="#skills" data-nav>Skills</a>
+          <a href="#projects" data-nav>Projects</a>
+          <a href="#experience" data-nav>Experience</a>
+          <a href="#education" data-nav>Education</a>
+          <a href="#certs" data-nav>Certifications</a>
+          <a href="#contact" data-nav>Contact</a>
+          <a class="navCta" href="#" download>Download Resume</a>
+        </div>
 
-      <!-- 01 -->
-      <div class="deckItem">
-        <div class="card proj">
-          <div class="top">
-            <h3>Telco Customer Churn Prediction</h3>
-            <span class="badge">Python • ML</span>
-          </div>
-          <p>Churn prediction pipeline with cross-validation and Streamlit app.</p>
+        <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
+          <span></span>
+        </button>
+      </div>
+
+      <div class="mobileMenu" id="mobileMenu">
+        <a href="#about" data-nav>About</a>
+        <a href="#skills" data-nav>Skills</a>
+        <a href="#projects" data-nav>Projects</a>
+        <a href="#experience" data-nav>Experience</a>
+        <a href="#education" data-nav>Education</a>
+        <a href="#certs" data-nav>Certifications</a>
+        <a href="#contact" data-nav>Contact</a>
+        <a class="navCta" href="#" download>Download Resume</a>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <div id="top" class="hero">
+      <div class="card heroMain">
+        <h1>Hi, I’m <span class="accent">Anam</span> — I build data systems & dashboards that drive decisions.</h1>
+        <p class="sub">
+          Data Analyst focused on Business Intelligence and practical analytics.
+          I enjoy turning messy data into clean models, reliable pipelines, and clear insights for stakeholders.
+        </p>
+
+        <div class="ctaRow">
+          <a class="btn primary" href="#projects">View Projects</a>
+          <a class="btn" href="#contact">Contact Me</a>
+          <a class="btn" href="#" download>Download Resume</a>
+        </div>
+
+        <div class="meta">
+          <span class="pill">📍 Ottawa, Canada</span>
+          <span class="pill">🎓 BISI @ Algonquin College</span>
+          <span class="pill">☁️ Cloud + BI + SQL</span>
+        </div>
+      </div>
+
+      <div class="card heroSide">
+        <div class="mini">
+          <h3>Current Focus</h3>
+          <p>SQL Server • Power BI • Python • AWS foundations</p>
+        </div>
+        <div class="mini">
+          <h3>Open To</h3>
+          <p>Co-op / Internship • Data Analyst • BI / Data roles</p>
+        </div>
+        <div class="mini">
+          <h3>Quick Links</h3>
+          <p>
+            LinkedIn: <a href="https://www.linkedin.com/in/anam-vakil/" target="_blank" rel="noreferrer">View Profile</a><br/>
+            GitHub: <a href="https://github.com/anamvakil" target="_blank" rel="noreferrer">View Repositories</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="sectionTitle">
+        <h2>About</h2>
+        <div class="hint">What I do + how I work</div>
+      </div>
+
+      <div class="grid">
+        <div class="card block col8">
+          <h3>Who I am</h3>
+          <p>
+            I’m a Data Analyst (BI-focused) who loves structured problem solving — from data cleaning and modeling
+            to dashboards and decision-ready reporting.
+          </p>
+          <p style="margin-top:10px;">
+            I’m currently building portfolio projects across SQL Server, Power BI, and Python to strengthen my analytics toolkit.
+          </p>
+        </div>
+
+        <div class="card block col4">
+          <h3>Highlights</h3>
+          <ul>
+            <li>Strong in SQL, modeling (3NF), and BI concepts</li>
+            <li>Hands-on projects: Churn ML + Address Register</li>
+            <li>Focused on clean metrics + clear storytelling</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="sectionTitle">
+        <h2>Skills</h2>
+        <div class="hint">Tools I use to analyze + communicate</div>
+      </div>
+
+      <div class="grid">
+        <div class="card block col4">
+          <h3>Data & SQL</h3>
           <div class="tags">
-            <span class="tag">Logistic Regression</span>
+            <span class="tag">SQL Server</span>
+            <span class="tag">Joins & CTEs</span>
+            <span class="tag">Constraints</span>
+            <span class="tag">Normalization (3NF)</span>
+          </div>
+        </div>
+
+        <div class="card block col4">
+          <h3>BI & Reporting</h3>
+          <div class="tags">
+            <span class="tag">Power BI</span>
+            <span class="tag">Dashboards</span>
+            <span class="tag">KPIs</span>
+            <span class="tag">Data Modeling</span>
+          </div>
+        </div>
+
+        <div class="card block col4">
+          <h3>Python & Analytics</h3>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">Pandas</span>
             <span class="tag">EDA</span>
             <span class="tag">Streamlit</span>
           </div>
-          <div class="linksRow">
-            <a href="#">GitHub</a>
-            <a href="#">Live Demo</a>
-          </div>
         </div>
       </div>
+    </section>
 
-      <!-- 02 -->
-      <div class="deckItem">
-        <div class="card proj">
-          <div class="top">
-            <h3>National Address Register (GA5)</h3>
-            <span class="badge">SQL • Data Engineering</span>
-          </div>
-          <p>Staging + 3NF normalized schema for large government datasets.</p>
-          <div class="tags">
-            <span class="tag">3NF</span>
-            <span class="tag">T-SQL</span>
-            <span class="tag">ERD</span>
-          </div>
-          <div class="linksRow">
-            <a href="#">Scripts</a>
-            <a href="#">Report</a>
-          </div>
-        </div>
+    <!-- PROJECTS (Scroll inside + Stack on top) -->
+    <section id="projects" class="projDeck">
+      <div class="sectionTitle">
+        <h2>Projects</h2>
+        <div class="hint">Scroll inside the frame</div>
       </div>
 
-      <!-- 03 -->
-      <div class="deckItem">
-        <div class="card proj">
-          <div class="top">
-            <h3>Power BI Dashboard</h3>
-            <span class="badge">Power BI</span>
+      <div class="deckFrame">
+        <div class="deck">
+
+          <div class="deckItem" style="--i:0">
+            <div class="card proj">
+              <div class="top">
+                <h3>Telco Customer Churn Prediction</h3>
+                <span class="badge">Python • ML</span>
+              </div>
+              <p>Built a churn prediction workflow with model evaluation and cross-validation, plus a simple app interface.</p>
+              <div class="tags">
+                <span class="tag">Logistic Regression</span>
+                <span class="tag">Cross-validation</span>
+                <span class="tag">Feature Engineering</span>
+                <span class="tag">Streamlit</span>
+              </div>
+              <div class="linksRow">
+                <a href="https://github.com/anamvakil/Telco-Churn-Prediction/tree/main" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="https://anam-churn-app.streamlit.app/" target="_blank" rel="noreferrer">Live Demo</a>
+                <a href="https://github.com/anamvakil/Telco-Churn-Prediction/blob/main/notebooks/app/report/Vakil_Anam_BI_IEEE_Report.pdf" target="_blank" rel="noreferrer">IEEE Report (PDF)</a>
+              </div>
+            </div>
           </div>
-          <p>Interactive dashboards with KPIs, slicers and trends.</p>
-          <div class="tags">
-            <span class="tag">DAX</span>
-            <span class="tag">Modeling</span>
+
+          <div class="deckItem" style="--i:1">
+            <div class="card proj">
+              <div class="top">
+                <h3>National Address Register (GA5)</h3>
+                <span class="badge">SQL • Data Engineering</span>
+              </div>
+              <p>Designed staging + normalized schema and developed scripts for loading and transforming large datasets while maintaining referential integrity.</p>
+              <div class="tags">
+                <span class="tag">Staging Table</span>
+                <span class="tag">3NF Schema</span>
+                <span class="tag">T-SQL</span>
+                <span class="tag">ERD</span>
+              </div>
+              <div class="linksRow">
+                <a href="#" target="_blank" rel="noreferrer">SQL Scripts</a>
+                <a href="#" target="_blank" rel="noreferrer">ERD</a>
+                <a href="#" target="_blank" rel="noreferrer">Report</a>
+              </div>
+            </div>
           </div>
-          <div class="linksRow">
-            <a href="#">PBIX</a>
+
+          <div class="deckItem" style="--i:2">
+            <div class="card proj">
+              <div class="top">
+                <h3>Power BI Dashboard (Data Visualization)</h3>
+                <span class="badge">Power BI • BI</span>
+              </div>
+              <p>Built an interactive Power BI dashboard with KPI cards, slicers, and trend visuals to support decision-ready insights.</p>
+              <div class="tags">
+                <span class="tag">Power BI</span>
+                <span class="tag">DAX</span>
+                <span class="tag">Data Modeling</span>
+                <span class="tag">KPIs</span>
+              </div>
+              <div class="linksRow">
+                <a href="#" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="#" target="_blank" rel="noreferrer">PBIX</a>
+                <a href="#" target="_blank" rel="noreferrer">Screenshots</a>
+              </div>
+            </div>
           </div>
+
+          <div class="deckItem" style="--i:3">
+            <div class="card proj">
+              <div class="top">
+                <h3>Crime Hotspot Detection — Ottawa</h3>
+                <span class="badge">Python • Analytics</span>
+              </div>
+              <p>Analyzed Ottawa crime incident data to identify geographic and time-based hotspots using EDA and visualization.</p>
+              <div class="tags">
+                <span class="tag">Pandas</span>
+                <span class="tag">EDA</span>
+                <span class="tag">Matplotlib</span>
+                <span class="tag">Hotspot Analysis</span>
+              </div>
+              <div class="linksRow">
+                <a href="#" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="#" target="_blank" rel="noreferrer">Notebook</a>
+                <a href="#" target="_blank" rel="noreferrer">Visuals</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="deckItem" style="--i:4">
+            <div class="card proj">
+              <div class="top">
+                <h3>Employee Absenteeism Analysis (Star Schema)</h3>
+                <span class="badge">SQL • Data Warehouse</span>
+              </div>
+              <p>Designed a multidimensional (star schema) model for absenteeism reporting, using fact and dimension tables for analytics-ready queries.</p>
+              <div class="tags">
+                <span class="tag">Star Schema</span>
+                <span class="tag">Fact &amp; Dimensions</span>
+                <span class="tag">T-SQL</span>
+                <span class="tag">ERD</span>
+              </div>
+              <div class="linksRow">
+                <a href="#" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="#" target="_blank" rel="noreferrer">SQL Scripts</a>
+                <a href="#" target="_blank" rel="noreferrer">Star Schema</a>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
+    </section>
 
-      <!-- 04 -->
-      <div class="deckItem">
-        <div class="card proj">
-          <div class="top">
-            <h3>Crime Hotspot Detection — Ottawa</h3>
-            <span class="badge">Python • Analytics</span>
-          </div>
-          <p>EDA and visualization to detect geographic crime hotspots.</p>
-          <div class="tags">
-            <span class="tag">Pandas</span>
-            <span class="tag">Matplotlib</span>
-          </div>
-          <div class="linksRow">
-            <a href="#">Notebook</a>
-          </div>
-        </div>
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="sectionTitle">
+        <h2>Experience</h2>
+        <div class="hint">Work, volunteering, clubs</div>
       </div>
 
-      <!-- 05 -->
-      <div class="deckItem">
-        <div class="card proj">
-          <div class="top">
-            <h3>Employee Absenteeism (Star Schema)</h3>
-            <span class="badge">SQL • DW</span>
-          </div>
-          <p>Star schema design for analytics-ready reporting.</p>
-          <div class="tags">
-            <span class="tag">Fact & Dimensions</span>
-            <span class="tag">SQL</span>
-          </div>
-          <div class="linksRow">
-            <a href="#">Schema</a>
-          </div>
+      <div class="grid">
+        <div class="card block col12">
+          <h3>Add your role here</h3>
+          <p class="small">Organization • City • Dates</p>
+          <ul>
+            <li>Bullet with measurable impact (what you did + outcome)</li>
+            <li>Tools used (SQL / Power BI / Excel / Python)</li>
+            <li>Stakeholder communication / reporting</li>
+          </ul>
         </div>
       </div>
+    </section>
 
-    </div>
+    <!-- EDUCATION -->
+    <section id="education">
+      <div class="sectionTitle">
+        <h2>Education</h2>
+        <div class="hint">What I’m studying</div>
+      </div>
+
+      <div class="grid">
+        <div class="card block col6">
+          <h3>Algonquin College — BISI (Co-op)</h3>
+          <p class="small">Business Intelligence System Infrastructure • Ottawa • 2025–2026</p>
+          <ul>
+            <li>BI, databases, analytics, and cloud foundations</li>
+            <li>Hands-on projects in SQL Server, Power BI, and Python</li>
+          </ul>
+        </div>
+
+        <div class="card block col6">
+          <h3>Additional Learning</h3>
+          <ul>
+            <li>Salesforce Trailhead (Admin learning)</li>
+            <li>AWS foundations learning</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section id="certs">
+      <div class="sectionTitle">
+        <h2>Certifications</h2>
+        <div class="hint">In progress counts too</div>
+      </div>
+
+      <div class="grid">
+        <div class="card block col4">
+          <h3>AWS</h3>
+          <p>Cloud Practitioner (in progress)</p>
+        </div>
+        <div class="card block col4">
+          <h3>Salesforce</h3>
+          <p>Salesforce Administrator (in progress)</p>
+        </div>
+        <div class="card block col4">
+          <h3>Power BI</h3>
+          <p>Dashboards • modeling • insights</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="sectionTitle">
+        <h2>Contact</h2>
+        <div class="hint">Let’s connect</div>
+      </div>
+
+      <div class="grid">
+        <div class="card block col6">
+          <h3>Email</h3>
+          <p>Replace with your email: <span class="mono">anam@email.com</span></p>
+          <div class="ctaRow" style="margin-top:12px;">
+            <a class="btn primary" href="mailto:anam@email.com">Email Me</a>
+          </div>
+        </div>
+
+        <div class="card block col6">
+          <h3>Social</h3>
+          <ul>
+            <li><a href="https://www.linkedin.com/in/anam-vakil/" target="_blank" rel="noreferrer" style="color:var(--accent); text-decoration:none; font-weight:900;">LinkedIn</a></li>
+            <li><a href="https://github.com/anamvakil" target="_blank" rel="noreferrer" style="color:var(--accent); text-decoration:none; font-weight:900;">GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span class="mono">2025</span> Anam Vakil</div>
+      <div class="small">Mobile-friendly nav ✅ • Responsive layout ✅ • Brighter palette ✅</div>
+    </footer>
+
   </div>
-</section>
 
-</div>
+  <script>
+    // blur when scrolled
+    const navInner = document.querySelector('.navInner');
+    const onScroll = () => {
+      if (window.scrollY > 10) navInner.classList.add('scrolled');
+      else navInner.classList.remove('scrolled');
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // highlight active section link
+    const navLinks = Array.from(document.querySelectorAll('a[data-nav]'));
+    const sections = navLinks
+      .map(a => document.querySelector(a.getAttribute('href')))
+      .filter(Boolean);
+
+    function setActiveById(id){
+      navLinks.forEach(a => {
+        const isActive = a.getAttribute('href') === `#${id}`;
+        a.classList.toggle('active', isActive);
+        if (isActive) a.setAttribute('aria-current', 'page');
+        else a.removeAttribute('aria-current');
+      });
+    }
+
+    navLinks.forEach(a => {
+      a.addEventListener('click', (e) => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', a.getAttribute('href'));
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter(e => e.isIntersecting)
+        .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+      if (visible && visible.target && visible.target.id) {
+        setActiveById(visible.target.id);
+      }
+    }, {
+      threshold: [0.2, 0.35, 0.5, 0.65],
+      rootMargin: "-20% 0px -60% 0px"
+    });
+
+    sections.forEach(sec => observer.observe(sec));
+
+    if (location.hash) {
+      const id = location.hash.replace('#','');
+      if (document.getElementById(id)) setActiveById(id);
+    } else if (sections[0]?.id) {
+      setActiveById(sections[0].id);
+    }
+
+    // mobile menu
+    const burger = document.getElementById('burger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    if (burger && mobileMenu) {
+      burger.addEventListener('click', () => {
+        const isOpen = mobileMenu.classList.toggle('open');
+        burger.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      mobileMenu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          mobileMenu.classList.remove('open');
+          burger.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+  </script>
 </body>
 </html>
